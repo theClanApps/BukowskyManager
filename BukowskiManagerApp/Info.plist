@@ -36,5 +36,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>1494844974130071</string>
+	<key>FacebookDisplayName</key>
+	<string>Bukowski Manager</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1494844974130071</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

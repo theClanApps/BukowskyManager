@@ -1,17 +1,16 @@
 //
-//  AppDelegate.h
-//  BukowskiManagerApp
+//  ParseStarterProjectAppDelegate.h
+//  ParseStarterProject
 //
-//  Created by Nicholas Servidio on 11/8/14.
-//  Copyright (c) 2014 The Clan. All rights reserved.
+//  Copyright 2014 Parse, Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class BKSBeerViewController;
 
-@property (strong, nonatomic) UIWindow *window;
+@interface AppDelegate : NSObject <UIApplicationDelegate>
 
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
 @end
-
