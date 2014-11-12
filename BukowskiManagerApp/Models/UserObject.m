@@ -1,0 +1,13 @@
+//
+//  UserObject.m
+//  BukowskiManagerApp
+//
+//  Created by Ezra on 11/9/14.
+//  Copyright (c) 2014 The Clan. All rights reserved.
+//
+
+#import "UserObject.h"
+
+@implementation UserObject
+
+@end
