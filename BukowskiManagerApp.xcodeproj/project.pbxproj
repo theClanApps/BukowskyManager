@@ -12,7 +12,6 @@
 		4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4914EA221A0FC9C5003D4FBB /* beers.csv */; };
 		4966FA521A0EED9700EE0824 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA511A0EED9700EE0824 /* main.m */; };
 		4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA541A0EED9700EE0824 /* AppDelegate.m */; };
-		4966FA581A0EED9700EE0824 /* BMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA571A0EED9700EE0824 /* BMHomeViewController.m */; };
 		4966FA5B1A0EED9700EE0824 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA591A0EED9700EE0824 /* Main.storyboard */; };
 		4966FA5D1A0EED9700EE0824 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA5C1A0EED9700EE0824 /* Images.xcassets */; };
 		4966FA601A0EED9700EE0824 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA5E1A0EED9700EE0824 /* LaunchScreen.xib */; };
@@ -22,6 +21,9 @@
 		638678171A1058D5008259DC /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638678161A1058D5008259DC /* UserTableViewCell.xib */; };
 		6386781A1A10598E008259DC /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 638678191A10598E008259DC /* UserTableViewCell.m */; };
 		6386781C1A105D2C008259DC /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 6386781B1A105D2C008259DC /* face.png */; };
+		497A2F7D1A0FF165006ED419 /* BMCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 497A2F7C1A0FF165006ED419 /* BMCSVParser.m */; };
+		49D325D51A11AA8C003769CA /* BMAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D325D41A11AA8C003769CA /* BMAccountManager.m */; };
+		49D325D91A11AC60003769CA /* BMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D325D71A11AC60003769CA /* BMHomeViewController.m */; };
 		63F78AB81A0FE2D800027857 /* Blue Moon White.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F78AB71A0FE2D800027857 /* Blue Moon White.png */; };
 		63F78ABA1A0FE30900027857 /* Boston Lager.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F78AB91A0FE30900027857 /* Boston Lager.png */; };
 		63F78ABC1A0FE35400027857 /* Dogfish 90.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F78ABB1A0FE35400027857 /* Dogfish 90.png */; };
@@ -54,8 +56,6 @@
 		4966FA511A0EED9700EE0824 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4966FA531A0EED9700EE0824 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4966FA541A0EED9700EE0824 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4966FA561A0EED9700EE0824 /* BMHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMHomeViewController.h; sourceTree = "<group>"; };
-		4966FA571A0EED9700EE0824 /* BMHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMHomeViewController.m; sourceTree = "<group>"; };
 		4966FA5A1A0EED9700EE0824 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4966FA5C1A0EED9700EE0824 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4966FA5F1A0EED9700EE0824 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -70,6 +70,12 @@
 		638678181A10598E008259DC /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
 		638678191A10598E008259DC /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 		6386781B1A105D2C008259DC /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
+		497A2F7B1A0FF165006ED419 /* BMCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCSVParser.h; sourceTree = "<group>"; };
+		497A2F7C1A0FF165006ED419 /* BMCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCSVParser.m; sourceTree = "<group>"; };
+		49D325D31A11AA8C003769CA /* BMAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMAccountManager.h; path = "BukowskiManagerApp/Web Services/BMAccountManager.h"; sourceTree = SOURCE_ROOT; };
+		49D325D41A11AA8C003769CA /* BMAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BMAccountManager.m; path = "BukowskiManagerApp/Web Services/BMAccountManager.m"; sourceTree = SOURCE_ROOT; };
+		49D325D71A11AC60003769CA /* BMHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMHomeViewController.m; sourceTree = "<group>"; };
+		49D325D81A11AC60003769CA /* BMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMHomeViewController.h; sourceTree = "<group>"; };
 		63F78AB71A0FE2D800027857 /* Blue Moon White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue Moon White.png"; sourceTree = "<group>"; };
 		63F78AB91A0FE30900027857 /* Boston Lager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Boston Lager.png"; sourceTree = "<group>"; };
 		63F78ABB1A0FE35400027857 /* Dogfish 90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dogfish 90.png"; sourceTree = "<group>"; };
@@ -171,6 +177,9 @@
 		4966FA4E1A0EED9700EE0824 /* BukowskiManagerApp */ = {
 			isa = PBXGroup;
 			children = (
+				49D325D81A11AC60003769CA /* BMHomeViewController.h */,
+				49D325D71A11AC60003769CA /* BMHomeViewController.m */,
+				497A2F7E1A0FF16D006ED419 /* CSVParsing */,
 				4914EA0C1A0FC12F003D4FBB /* Resources */,
 				4914EA011A0FB9B9003D4FBB /* Models */,
 				4966FA531A0EED9700EE0824 /* AppDelegate.h */,
@@ -182,6 +191,7 @@
 				638678161A1058D5008259DC /* UserTableViewCell.xib */,
 				638678181A10598E008259DC /* UserTableViewCell.h */,
 				638678191A10598E008259DC /* UserTableViewCell.m */,
+				49D325D61A11AAA5003769CA /* Web Services */,
 				4966FA591A0EED9700EE0824 /* Main.storyboard */,
 				4966FA5C1A0EED9700EE0824 /* Images.xcassets */,
 				4966FA5E1A0EED9700EE0824 /* LaunchScreen.xib */,
@@ -216,6 +226,24 @@
 				4966FA6A1A0EED9700EE0824 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		497A2F7E1A0FF16D006ED419 /* CSVParsing */ = {
+			isa = PBXGroup;
+			children = (
+				497A2F7B1A0FF165006ED419 /* BMCSVParser.h */,
+				497A2F7C1A0FF165006ED419 /* BMCSVParser.m */,
+			);
+			name = CSVParsing;
+			sourceTree = "<group>";
+		};
+		49D325D61A11AAA5003769CA /* Web Services */ = {
+			isa = PBXGroup;
+			children = (
+				49D325D31A11AA8C003769CA /* BMAccountManager.h */,
+				49D325D41A11AA8C003769CA /* BMAccountManager.m */,
+			);
+			name = "Web Services";
 			sourceTree = "<group>";
 		};
 		B8831AB6A54DF0DAD65E443F /* Frameworks */ = {
@@ -375,11 +403,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6386781A1A10598E008259DC /* UserTableViewCell.m in Sources */,
+				49D325D91A11AC60003769CA /* BMHomeViewController.m in Sources */,
+				49D325D51A11AA8C003769CA /* BMAccountManager.m in Sources */,
 				4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */,
-				4966FA581A0EED9700EE0824 /* BMHomeViewController.m in Sources */,
 				4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */,
 				638678151A1049E1008259DC /* BMUserTableViewController.m in Sources */,
 				638678121A1046D5008259DC /* UserObject.m in Sources */,
+				497A2F7D1A0FF165006ED419 /* BMCSVParser.m in Sources */,
 				4966FA521A0EED9700EE0824 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
