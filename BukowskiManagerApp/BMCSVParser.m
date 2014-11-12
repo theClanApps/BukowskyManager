@@ -111,7 +111,7 @@ NS_ENUM(NSInteger, BMBeerField) {
         
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
-                beer.beerImage = imageFile;
+                beer.bottleImage = imageFile;
                 [beer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Saved Beer in background");
