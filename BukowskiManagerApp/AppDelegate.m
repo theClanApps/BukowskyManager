@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "BMCSVParser.h"
+
 @implementation AppDelegate
 
 #pragma mark - UIApplicationDelegate
@@ -65,7 +67,7 @@
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
-
+    [[BMCSVParser sharedParser] loadCSVFileNamed:@"beers"];
     return YES;
 }
 
