@@ -8,7 +8,9 @@
 
 #import <Parse/Parse.h>
 
-@interface UserObject : PFFile
+@interface UserObject : PFUser
+
+@property (strong, nonatomic) NSString *name;
 
 @property (strong, nonatomic) NSNumber *userId;
 @property (strong, nonatomic) NSString *firstName;
