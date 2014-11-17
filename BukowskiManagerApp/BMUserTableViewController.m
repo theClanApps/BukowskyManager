@@ -10,12 +10,14 @@
 #import "UserObject.h"
 #import "UserTableViewCell.h"
 #import "BMAccountManager.h"
+#import "BMUserBeerTableViewController.h"
 
 @interface BMUserTableViewController ()
 
 @property (nonatomic, strong) NSArray *users;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userLastNameLabel;
+@property (strong, nonatomic) UserObject *selectedUser;
 
 @end
 
@@ -170,14 +172,25 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedUser = self.users[indexPath.row];
+    NSLog(@"User selected: %@",((PFUser *)self.users[indexPath.row])[@"name"]);
+    [self performSegueWithIdentifier:@"selectUserSegue" sender:self];
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    if ([[segue identifier] isEqualToString:@"selectUserSegue"]) {
+
+        BMUserBeerTableViewController *beerListVC = (BMUserBeerTableViewController *)segue.destinationViewController;
+        
+        beerListVC.user = self.selectedUser;
+    }
+}
+
 
 @end
