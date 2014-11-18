@@ -44,7 +44,7 @@
 {
     if ([self.commentTextView.text isEqualToString:@"Optionally enter comments here"]) {
         self.commentTextView.text = @"";
-        self.commentTextView.textColor = [UIColor blackColor]; //optional
+        self.commentTextView.textColor = [UIColor blackColor];
     }
     [self.commentTextView becomeFirstResponder];
 }
@@ -53,7 +53,7 @@
 {
     if ([self.commentTextView.text isEqualToString:@""]) {
         self.commentTextView.text = @"Optionally enter comments here";
-        self.commentTextView.textColor = [UIColor lightGrayColor]; //optional
+        self.commentTextView.textColor = [UIColor lightGrayColor];
     }
     [self.commentTextView resignFirstResponder];
 }
@@ -77,8 +77,6 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
  
     if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
         
