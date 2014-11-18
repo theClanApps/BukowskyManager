@@ -36,4 +36,21 @@
     }];
 }
 
+- (void)loadUserBeersWithSuccess:(void(^)(NSArray *userBeers, NSError *error))block
+{
+    //Replace predicate filter with parameter to get the user selected;
+    //Do I need to pass the user from the VC?
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = 'Ezra Tanzer'"];
+    PFQuery *query = [PFQuery queryWithClassName:@"_UserBeer" predicate:predicate];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (block) {
+                block(objects, nil);
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
 @end

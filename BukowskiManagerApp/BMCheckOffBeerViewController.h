@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserBeerObject.h"
 
 @interface BMCheckOffBeerViewController : UIViewController
+
+@property (strong, nonatomic) UserBeerObject *userBeer;
 
 @end

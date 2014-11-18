@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GmS-7O-TRp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R0c-SB-BbI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -81,22 +81,9 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ezu-fi-15g" id="vCu-X2-jF7">
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQD-eq-OG3">
-                                            <rect key="frame" x="8" y="14" width="545" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="OQD-eq-OG3" firstAttribute="leading" secondItem="vCu-X2-jF7" secondAttribute="leadingMargin" id="Vdk-oU-W7b"/>
-                                        <constraint firstItem="OQD-eq-OG3" firstAttribute="trailing" secondItem="vCu-X2-jF7" secondAttribute="trailingMargin" id="W6O-1J-YDy"/>
-                                        <constraint firstAttribute="centerY" secondItem="OQD-eq-OG3" secondAttribute="centerY" constant="-2.5" id="d22-uU-TGf"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="R0c-SB-BbI" kind="show" id="rpV-Ck-k3p"/>
+                                    <segue destination="R0c-SB-BbI" kind="show" identifier="I" id="rpV-Ck-k3p"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -141,13 +128,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCH-4O-9OS">
-                                <rect key="frame" x="16" y="159" width="568" height="351"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCH-4O-9OS" customClass="BMBeerCommentsTextView">
+                                <rect key="frame" x="16" y="159" width="568" height="302"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="139" id="iRf-kv-T39"/>
                                 </constraints>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="default">
@@ -156,34 +142,46 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxk-fb-CwX">
-                                <rect key="frame" x="284" y="518" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwX-n6-OJi">
+                                <rect key="frame" x="230" y="469" width="140" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="kmT-Oz-DxO"/>
+                                </constraints>
+                                <state key="normal" title="Mark it Drank!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="markItDrankButton:" destination="R0c-SB-BbI" eventType="touchUpInside" id="BOe-5C-KWd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vCH-4O-9OS" firstAttribute="trailing" secondItem="Da5-9f-4wW" secondAttribute="trailingMargin" id="1FQ-yV-ygx"/>
                             <constraint firstItem="Kqy-8K-Afi" firstAttribute="trailing" secondItem="Da5-9f-4wW" secondAttribute="trailingMargin" id="2wm-BQ-ULs"/>
-                            <constraint firstItem="Bdm-LU-gf6" firstAttribute="top" secondItem="Bxk-fb-CwX" secondAttribute="bottom" constant="8" id="5ju-BR-i45"/>
                             <constraint firstItem="XuN-BS-Jg0" firstAttribute="leading" secondItem="Da5-9f-4wW" secondAttribute="leadingMargin" id="NRA-mB-F80"/>
                             <constraint firstItem="XuN-BS-Jg0" firstAttribute="trailing" secondItem="Da5-9f-4wW" secondAttribute="trailingMargin" id="QNn-MA-dLg"/>
-                            <constraint firstItem="Bxk-fb-CwX" firstAttribute="top" secondItem="vCH-4O-9OS" secondAttribute="bottom" constant="8" id="QYh-qz-RyU"/>
                             <constraint firstItem="rVO-5V-15v" firstAttribute="trailing" secondItem="Da5-9f-4wW" secondAttribute="trailingMargin" id="Rf9-0r-Bav"/>
+                            <constraint firstItem="cwX-n6-OJi" firstAttribute="top" secondItem="vCH-4O-9OS" secondAttribute="bottom" constant="8" id="YlS-67-LOO"/>
                             <constraint firstItem="rVO-5V-15v" firstAttribute="leading" secondItem="Da5-9f-4wW" secondAttribute="leadingMargin" id="ah7-AE-Oet"/>
+                            <constraint firstAttribute="centerX" secondItem="cwX-n6-OJi" secondAttribute="centerX" id="daQ-v3-Z81"/>
                             <constraint firstItem="Kqy-8K-Afi" firstAttribute="leading" secondItem="Da5-9f-4wW" secondAttribute="leadingMargin" id="gcG-cx-K0Q"/>
                             <constraint firstItem="Kqy-8K-Afi" firstAttribute="top" secondItem="XuN-BS-Jg0" secondAttribute="bottom" constant="8" id="n1N-b7-Bvm"/>
                             <constraint firstItem="XuN-BS-Jg0" firstAttribute="top" secondItem="rVO-5V-15v" secondAttribute="bottom" constant="8" id="oYL-W5-UX3"/>
                             <constraint firstItem="vCH-4O-9OS" firstAttribute="top" secondItem="Kqy-8K-Afi" secondAttribute="bottom" constant="8" id="stX-NB-iUQ"/>
-                            <constraint firstAttribute="centerX" secondItem="Bxk-fb-CwX" secondAttribute="centerX" constant="-7" id="vO1-5O-egk"/>
+                            <constraint firstItem="Bdm-LU-gf6" firstAttribute="top" secondItem="cwX-n6-OJi" secondAttribute="bottom" constant="7" id="vqQ-uw-TiI"/>
                             <constraint firstItem="vCH-4O-9OS" firstAttribute="leading" secondItem="Da5-9f-4wW" secondAttribute="leadingMargin" id="waB-ih-5le"/>
                             <constraint firstItem="rVO-5V-15v" firstAttribute="top" secondItem="iOa-lv-efr" secondAttribute="bottom" constant="8" id="xZR-2D-8qd"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="beerNameLabel" destination="XuN-BS-Jg0" id="jvS-sn-HSB"/>
+                        <outlet property="commentTextView" destination="vCH-4O-9OS" id="IdB-UW-TJn"/>
+                        <outlet property="userNameLabel" destination="rVO-5V-15v" id="tDD-bT-XX2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5L-wy-688" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

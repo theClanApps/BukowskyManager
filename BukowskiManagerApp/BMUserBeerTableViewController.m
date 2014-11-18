@@ -7,8 +7,15 @@
 //
 
 #import "BMUserBeerTableViewController.h"
+#import "BMAccountManager.h"
+#import "UserBeerObject.h"
+#import "BMCheckOffBeerViewController.h"
 
 @interface BMUserBeerTableViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *beerNameLabel;
+
+@property (strong, nonatomic) NSArray *userBeers;
+@property (strong, nonatomic) UserBeerObject *selectedUserBeer;
 
 @end
 
@@ -16,12 +23,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //For loadUserBeers, do I need to pass the User?
+    [self loadUserBeers];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)loadUserBeers
+{
+    
+    //Do I need to pass this method the User? Yes definitely. Help please, Nick.
+    [[BMAccountManager sharedAccountManager] loadUserBeersWithSuccess:^(NSArray *userBeers, NSError *error) {
+        if (!error) {
+            self.userBeers = userBeers;
+            [self.tableView reloadData];
+            NSLog(@"User Beers: %@", userBeers);
+        }
+    }];
+     
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return [self.userBeers count];
 }
 
 
@@ -46,7 +70,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BeerCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    UserBeerObject *userBeerForCell = [self.userBeers objectAtIndex:indexPath.row];
+    BeerObject *beerForCell = userBeerForCell.beer;
+    cell.textLabel.text = beerForCell.beerName;
     
+    //Check off the box if drank
+    if (userBeerForCell.drank) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+
     return cell;
 }
 
@@ -89,14 +123,31 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedUserBeer = self.userBeers[indexPath.row];
+    NSLog(@"UserBeer selected: %@",self.selectedUserBeer.beer.beerName);
+    
+    if (self.selectedUserBeer.drank) {
+        [self performSegueWithIdentifier:@"checkOffBeerSegue" sender:self];
+    } else {
+        //Send to a different view controller that is read only with no action buttons
+    }
+    
+    
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
+        
+        BMCheckOffBeerViewController *checkOffBeerVC = (BMCheckOffBeerViewController *)segue.destinationViewController;
+        
+        checkOffBeerVC.userBeer = self.selectedUserBeer;
+    }
+}
 
 @end

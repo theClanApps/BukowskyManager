@@ -10,7 +10,7 @@
 #import "UserObject.h"
 #import "BeerObject.h"
 
-@interface UserBeerObject : PFObject
+@interface UserBeerObject : PFObject <PFSubclassing>
 
 @property (strong, nonatomic) UserObject *drinkingUser;
 @property (strong, nonatomic) BeerObject *beer;
@@ -18,5 +18,7 @@
 @property (strong, nonatomic) NSDate *dateDrank;
 @property (strong, nonatomic) UserObject *checkingEmployee;
 @property (strong, nonatomic) NSString *checkingEmployeeComments;
+
++ (NSString *)parseClassName;
 
 @end

@@ -12,5 +12,6 @@
 
 + (id)sharedAccountManager;
 - (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block;
+- (void)loadUserBeersWithSuccess:(void(^)(NSArray *userBeers, NSError *error))block;
 
 @end

@@ -11,4 +11,13 @@
 @implementation UserBeerObject
 @dynamic drinkingUser, beer, drank, dateDrank, checkingEmployee, checkingEmployeeComments;
 
++ (void)load
+{
+    [self registerSubclass];
+}
+
++ (NSString *)parseClassName {
+    return @"UserBeerObject";
+}
+
 @end
