@@ -7,6 +7,7 @@
 //
 
 #import "BMCheckOffBeerViewController.h"
+#import "BMUserBeerTableViewController.h"
 
 @interface BMCheckOffBeerViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -71,17 +72,55 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-}
-*/
-- (IBAction)markItDrankButton:(id)sender {
+ 
+    if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
+        
+    //Code should probably be moved to BMAccountManager; need Nick's help moving it
+    /*
+     PFQuery *query = [PFQuery queryWithClassName:@"UserBeerObject"];
+     
+     // How do we get the object ID?
+     [query getObjectInBackgroundWithId:@"???" block:^(PFObject *userBeer, NSError *error) {
+     
+     // Now let's update it with some new data. In this case, only cheatMode and score
+     // will get sent to the cloud. playerName hasn't changed.
+     
+     
+     //Get current date
+     NSDate *currentDate = [NSDate date];
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+     NSString *currentFormattedDate = [dateFormatter stringFromDate: currentDate];
+     
+     userBeer[@"dateDrank"] = currentFormattedDate;
+     
+     userBeer[@"drank"] = @true;
+     userBeer[@"checkingEmployee"] = //user who is logged in???
+     
+     if (![self.commentTextView.text isEqualToString: @"Optionally enter comments here") {
+     userBeer[@"checkingEmployeeComments"] = self.commentTextView.text;
+     }
+     [gameScore saveInBackground];
+     
+     }];
+     
+     */
     
+    //Return to the beer controller
+    BMUserBeerTableViewController *beerListVC = (BMUserBeerTableViewController *)segue.destinationViewController;
+        
+    beerListVC.user = self.userBeer.drinkingUser;
+        
+    }
+ 
+ 
 }
 
 @end

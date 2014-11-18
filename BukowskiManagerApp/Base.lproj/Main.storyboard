@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R0c-SB-BbI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gz9-nf-Jys">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -152,7 +152,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="markItDrankButton:" destination="R0c-SB-BbI" eventType="touchUpInside" id="BOe-5C-KWd"/>
+                                    <segue destination="Hfg-P3-Bo4" kind="presentation" identifier="markItDrankSegue" id="d0f-WD-Dgw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -206,4 +206,7 @@
             <point key="canvasLocation" x="980" y="-535"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="d0f-WD-Dgw"/>
+    </inferredMetricsTieBreakers>
 </document>
