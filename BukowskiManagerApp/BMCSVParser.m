@@ -18,7 +18,8 @@ NS_ENUM(NSInteger, BMBeerField) {
     BMBeerFieldABV,
     BMBeerFieldPrice,
     BMBeerFieldSize,
-    BMBeerFieldNickname
+    BMBeerFieldNickname,
+    BMBeerFieldIsActive
 };
 
 @interface BMCSVParser() <CHCSVParserDelegate>
@@ -79,6 +80,8 @@ NS_ENUM(NSInteger, BMBeerField) {
         case BMBeerFieldPrice: self.beer.price = field; break;
         case BMBeerFieldSize: self.beer.size = field; break;
         case BMBeerFieldNickname: self.beer.nickname = field; break;
+        case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? YES : NO;
+            break;
         default: break;
     }
 }

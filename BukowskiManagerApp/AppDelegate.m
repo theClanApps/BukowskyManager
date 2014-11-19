@@ -67,7 +67,7 @@
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
-    [[BMCSVParser sharedParser] loadCSVFileNamed:@"beers"];
+    [[BMCSVParser sharedParser] loadCSVFileNamed:@"beers2"];
     return YES;
 }
 
