@@ -7,6 +7,7 @@
 //
 
 #import "UserBeerObject.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation UserBeerObject
 @dynamic drinkingUser, beer, drank, dateDrank, checkingEmployee, checkingEmployeeComments;

@@ -8,6 +8,8 @@
 
 #import "BMAccountManager.h"
 #import <Parse/Parse.h>
+#import "UserBeerObject.h"
+#import "BeerObject.h"
 
 @implementation BMAccountManager
 
@@ -36,12 +38,11 @@
     }];
 }
 
-- (void)loadUserBeersWithSuccess:(void(^)(NSArray *userBeers, NSError *error))block
+- (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block
 {
-    //Replace predicate filter with parameter to get the user selected;
-    //Do I need to pass the user from the VC?
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = 'Ezra Tanzer'"];
-    PFQuery *query = [PFQuery queryWithClassName:@"_UserBeer" predicate:predicate];
+    PFQuery *query = [PFQuery queryWithClassName:@"UserBeerObject"];
+    [query whereKey:@"drinkingUser" equalTo:user];
+    [query includeKey:@"beer"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if (block) {
@@ -52,5 +53,27 @@
         }
     }];
 }
+
+- (void)checkoffBeer:(UserBeerObject *)userBeer
+        withComments:(NSString *)comments
+      WithCompletion:(void(^)(NSError *error, UserBeerObject *userBeer))completion {
+    userBeer.drank = [NSNumber numberWithBool:YES];
+    userBeer.dateDrank = [NSDate date];
+    userBeer.checkingEmployeeComments = comments;
+    //userBeer.checkingEmployee = [PFUser currentUser];
+    
+    [userBeer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            if (completion) {
+                completion(nil, userBeer);
+            }
+        } else {
+            if (completion) {
+                completion(error, nil);
+            }
+        }
+    }];
+}
+
 
 @end

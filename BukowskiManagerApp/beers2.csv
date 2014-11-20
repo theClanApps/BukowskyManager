@@ -1,0 +1,11 @@
+Beer Name,Brewery Name,Style,Description,ABV,Price,Size,Nickname,isActive
+Boston Lager,Samuel Adams,Lager,Full-flavored with a balance of malty sweetness contrasted by hop spiciness and a smooth finish,4.9,6,12,Boston Lager,yes
+90 Minute IPA,Dogfish Head,Imperial IPA,"An imperial IPA best savored from a snifter, 90 Minute has a great malt backbone that stands up to the extreme hopping rate.",9,9,12,Dogfish 90,no
+Draught,Guiness,Stout,Super generic Irish stout.,4.2,7,12,Guiness Draught,yes
+#9,Magic Hat,Fruit,"A sort of dry, crisp, refreshing, not-quite pale ale. #9 is really impossible to describe because there's never been anything else quite like it",5.1,6.5,12,Magic Hat 9,no
+Miller Lite,Miller,Light Lager,The worst of the worst.,4.17,5,12,Miller Lite,yes
+IPA,Lagunitas,IPA,"Standard, great IPA.",6.2,7.5,12,Lagunitas IPA,no
+Traditional Lager,Yuengling,Lager,The best of the worst standard party lagers on the market.,4.4,6.5,12,Yuengling Lager,yes
+Blue Moon Belgian White,Coors Brewing Company,Witbier,Your girlfriend tells you she loves this beer.,5.4,5.5,12,Blue Moon White,no
+Blue (Grand Reserve),Chimay,Strong Ale,One of the Chimay beers.,9,9.5,12,Chimay Blue,yes
+Newcastle Brown Ale,The Caledonian Brewery Company Limited,Brown Ale,"It’s the first brown ale you claimed to like. It’s ok, but a little too sweet for a beer that it’s a double or triple.",4.7,7,12,Newcastle Brown,no

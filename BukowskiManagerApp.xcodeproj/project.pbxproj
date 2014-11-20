@@ -10,6 +10,7 @@
 		098F32DF9E5B70F43178EB69 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6489F081D109F4AF0BE56FEE /* libPods.a */; };
 		4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914EA0A1A0FC121003D4FBB /* BeerObject.m */; };
 		4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4914EA221A0FC9C5003D4FBB /* beers.csv */; };
+		4916C0691A1C3FFE00DA65D1 /* beers2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4916C0681A1C3FFE00DA65D1 /* beers2.csv */; };
 		4966FA521A0EED9700EE0824 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA511A0EED9700EE0824 /* main.m */; };
 		4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA541A0EED9700EE0824 /* AppDelegate.m */; };
 		4966FA5B1A0EED9700EE0824 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA591A0EED9700EE0824 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		4914EA091A0FC121003D4FBB /* BeerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerObject.h; sourceTree = "<group>"; };
 		4914EA0A1A0FC121003D4FBB /* BeerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerObject.m; sourceTree = "<group>"; };
 		4914EA221A0FC9C5003D4FBB /* beers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers.csv; sourceTree = "<group>"; };
+		4916C0681A1C3FFE00DA65D1 /* beers2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers2.csv; sourceTree = "<group>"; };
 		4966FA4C1A0EED9700EE0824 /* BukowskiManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BukowskiManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4966FA501A0EED9700EE0824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4966FA511A0EED9700EE0824 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		4966FA4F1A0EED9700EE0824 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4916C0681A1C3FFE00DA65D1 /* beers2.csv */,
 				6386781B1A105D2C008259DC /* face.png */,
 				4914EA221A0FC9C5003D4FBB /* beers.csv */,
 				4966FA501A0EED9700EE0824 /* Info.plist */,
@@ -351,6 +354,7 @@
 			files = (
 				4966FA5B1A0EED9700EE0824 /* Main.storyboard in Resources */,
 				63F78ACA1A0FE6C500027857 /* Chimay Blue.png in Resources */,
+				4916C0691A1C3FFE00DA65D1 /* beers2.csv in Resources */,
 				4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */,
 				4966FA601A0EED9700EE0824 /* LaunchScreen.xib in Resources */,
 				638678171A1058D5008259DC /* UserTableViewCell.xib in Resources */,

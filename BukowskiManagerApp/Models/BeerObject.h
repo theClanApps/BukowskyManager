@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *nickname;
 @property (strong, nonatomic) PFFile *bottleImage;
 @property (strong, nonatomic) PFFile *glassImage;
+@property (nonatomic, assign) BOOL isActive;
 
 + (NSString *)parseClassName;
 

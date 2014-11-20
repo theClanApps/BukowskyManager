@@ -25,32 +25,22 @@
     [super viewDidLoad];
     //For loadUserBeers, do I need to pass the User?
     [self loadUserBeers];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)loadUserBeers
-{
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)loadUserBeers {
     //Do I need to pass this method the User? Yes definitely. Help please, Nick.
-    [[BMAccountManager sharedAccountManager] loadUserBeersWithSuccess:^(NSArray *userBeers, NSError *error) {
+    [[BMAccountManager sharedAccountManager] loadUserBeersForUser:self.user WithSuccess:^(NSArray *userBeers, NSError *error) {
         if (!error) {
             self.userBeers = userBeers;
             [self.tableView reloadData];
             NSLog(@"User Beers: %@", userBeers);
         }
     }];
-     
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -75,7 +65,7 @@
     cell.textLabel.text = beerForCell.beerName;
     
     //Check off the box if drank
-    if (userBeerForCell.drank) {
+    if (userBeerForCell.drank.boolValue) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -89,64 +79,15 @@
     return 40;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Navigation
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    self.selectedUserBeer = self.userBeers[indexPath.row];
-    NSLog(@"UserBeer selected: %@",self.selectedUserBeer.beer.beerName);
-    
-    if (self.selectedUserBeer.drank) {
-        [self performSegueWithIdentifier:@"checkOffBeerSegue" sender:self];
-    } else {
-        //Send to a different view controller that is read only with no action buttons
-    }
-    
-    
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
         
         BMCheckOffBeerViewController *checkOffBeerVC = (BMCheckOffBeerViewController *)segue.destinationViewController;
-        
-        checkOffBeerVC.userBeer = self.selectedUserBeer;
+        NSInteger offset = [self.tableView indexPathForCell:sender].row;
+        checkOffBeerVC.userBeer = (UserBeerObject *)[self.userBeers objectAtIndex:offset];
     }
 }
 
