@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
+@class BeerObject;
+@class UserBeerObject;
 
 @interface BMAccountManager : NSObject
 
 + (id)sharedAccountManager;
 - (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block;
-- (void)loadUserBeersWithSuccess:(void(^)(NSArray *userBeers, NSError *error))block;
-
+- (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block;
+- (void)checkoffBeer:(UserBeerObject *)userBeer
+        withComments:(NSString *)comments
+      WithCompletion:(void(^)(NSError *error, UserBeerObject *userBeer))completion;
 @end

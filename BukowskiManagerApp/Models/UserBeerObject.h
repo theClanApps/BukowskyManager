@@ -12,11 +12,11 @@
 
 @interface UserBeerObject : PFObject <PFSubclassing>
 
-@property (strong, nonatomic) UserObject *drinkingUser;
+@property (strong, nonatomic) PFUser *drinkingUser;
 @property (strong, nonatomic) BeerObject *beer;
-@property (nonatomic) BOOL *drank;
+@property (strong, nonatomic) NSNumber *drank;
 @property (strong, nonatomic) NSDate *dateDrank;
-@property (strong, nonatomic) UserObject *checkingEmployee;
+@property (strong, nonatomic) PFUser *checkingEmployee;
 @property (strong, nonatomic) NSString *checkingEmployeeComments;
 
 + (NSString *)parseClassName;
