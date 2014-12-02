@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		098F32DF9E5B70F43178EB69 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6489F081D109F4AF0BE56FEE /* libPods.a */; };
+		490ED74D1A2E7A5500FC0019 /* BKSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490ED74C1A2E7A5500FC0019 /* BKSLoginViewController.m */; };
+		490ED7501A2E7F7700FC0019 /* BMPendingApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490ED74F1A2E7F7700FC0019 /* BMPendingApprovalViewController.m */; };
 		4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914EA0A1A0FC121003D4FBB /* BeerObject.m */; };
 		4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4914EA221A0FC9C5003D4FBB /* beers.csv */; };
 		4916C0691A1C3FFE00DA65D1 /* beers2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4916C0681A1C3FFE00DA65D1 /* beers2.csv */; };
@@ -52,6 +54,10 @@
 
 /* Begin PBXFileReference section */
 		0439C4262351CBA0187529CE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		490ED74B1A2E7A5500FC0019 /* BKSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKSLoginViewController.h; sourceTree = "<group>"; };
+		490ED74C1A2E7A5500FC0019 /* BKSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKSLoginViewController.m; sourceTree = "<group>"; };
+		490ED74E1A2E7F7700FC0019 /* BMPendingApprovalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMPendingApprovalViewController.h; sourceTree = "<group>"; };
+		490ED74F1A2E7F7700FC0019 /* BMPendingApprovalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMPendingApprovalViewController.m; sourceTree = "<group>"; };
 		4914EA091A0FC121003D4FBB /* BeerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerObject.h; sourceTree = "<group>"; };
 		4914EA0A1A0FC121003D4FBB /* BeerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerObject.m; sourceTree = "<group>"; };
 		4914EA221A0FC9C5003D4FBB /* beers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers.csv; sourceTree = "<group>"; };
@@ -190,6 +196,10 @@
 		4966FA4E1A0EED9700EE0824 /* BukowskiManagerApp */ = {
 			isa = PBXGroup;
 			children = (
+				490ED74E1A2E7F7700FC0019 /* BMPendingApprovalViewController.h */,
+				490ED74F1A2E7F7700FC0019 /* BMPendingApprovalViewController.m */,
+				490ED74B1A2E7A5500FC0019 /* BKSLoginViewController.h */,
+				490ED74C1A2E7A5500FC0019 /* BKSLoginViewController.m */,
 				49D325D81A11AC60003769CA /* BMHomeViewController.h */,
 				49D325D71A11AC60003769CA /* BMHomeViewController.m */,
 				497A2F7E1A0FF16D006ED419 /* CSVParsing */,
@@ -423,6 +433,8 @@
 				49D325D91A11AC60003769CA /* BMHomeViewController.m in Sources */,
 				49D325D51A11AA8C003769CA /* BMAccountManager.m in Sources */,
 				639A87001A1A9DF500D340C9 /* BMUserBeerTableViewController.m in Sources */,
+				490ED7501A2E7F7700FC0019 /* BMPendingApprovalViewController.m in Sources */,
+				490ED74D1A2E7A5500FC0019 /* BKSLoginViewController.m in Sources */,
 				4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */,
 				4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */,
 				638678151A1049E1008259DC /* BMUserTableViewController.m in Sources */,

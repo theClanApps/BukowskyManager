@@ -8,13 +8,19 @@
 
 #import "BMAccountManager.h"
 #import <Parse/Parse.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import "UserBeerObject.h"
 #import "BeerObject.h"
 
+@interface BMAccountManager ()
+@property (strong, nonatomic) NSArray *faceBookPermissions;
+
+@end
+
 @implementation BMAccountManager
 
-+ (id)sharedAccountManager
-{
++ (id)sharedAccountManager {
     static BMAccountManager *_sharedAccountManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -23,8 +29,46 @@
     return _sharedAccountManager;
 }
 
-- (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block
-{
+- (NSArray *)faceBookPermissions {
+    if (_faceBookPermissions == nil) {
+        _faceBookPermissions = @[@"public_profile"];
+    }
+    return _faceBookPermissions;
+}
+
+- (void)loginWithWithSuccess:(BKSSuccessBlock)success failure:(BKSErrorBlock)failure {
+    [PFFacebookUtils logInWithPermissions:self.faceBookPermissions block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            if (!error) {
+                NSLog(@"User cancelled FB Login");
+            } else {
+                NSLog(@"Error: %@",error);
+                if (failure) {
+                    failure(error);
+                }
+            }
+        } else {
+            if (user.isNew) {
+                NSLog(@"User with facebook signed up and logged in!");
+                user[@"approved"] = @NO;
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"Added approved to user object");
+                    } else {
+                        NSLog(@"Error saving approved to user object: %@",error);
+                    }
+                }];
+            } else {
+                NSLog(@"User with facebook logged in!");
+            }
+            if (success) {
+                success(user);
+            }
+        }
+    }];
+}
+
+- (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block {
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
     [query whereKeyExists:@"MugClubStartDate"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -38,8 +82,7 @@
     }];
 }
 
-- (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block
-{
+- (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block {
     PFQuery *query = [PFQuery queryWithClassName:@"UserBeerObject"];
     [query whereKey:@"drinkingUser" equalTo:user];
     [query includeKey:@"beer"];
@@ -75,5 +118,13 @@
     }];
 }
 
+- (void)logout {
+    [PFUser logOut];
+}
+
+- (BOOL)userIsApproved:(PFUser *)user {
+    NSNumber *val = user[@"approved"];
+    return val.boolValue;
+}
 
 @end
