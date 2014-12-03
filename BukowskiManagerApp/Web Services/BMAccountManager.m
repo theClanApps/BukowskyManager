@@ -103,7 +103,7 @@
     userBeer.drank = [NSNumber numberWithBool:YES];
     userBeer.dateDrank = [NSDate date];
     userBeer.checkingEmployeeComments = comments;
-    //userBeer.checkingEmployee = [PFUser currentUser];
+    userBeer.checkingEmployee = [PFUser currentUser];
     
     [userBeer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
