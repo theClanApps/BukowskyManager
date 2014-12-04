@@ -33,7 +33,6 @@
     //Make the labels populate with beer name & user name, and checking employee
     //[self.userNameLabel.text = self.userBeer.drinkingUser];
     //[self.beerNameLabel.text = self.userBeer.beer.beerName];
-    //[self.checkingEmployeeLabel.text = @"Checking Employee: %@", ...
     
     //Set dateFormatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -45,6 +44,9 @@
         NSDate *currentTime = [NSDate date];
         NSString *dateString = [dateFormatter stringFromDate: currentTime];
         self.dateDrankLabel.text = dateString;
+        
+        //prepopulate checkingEmployee with user logged in
+        //self.checkingEmployeeLabel.text = @"Checking Employee: %@", ...
         
         //Set placeholder text
         self.commentTextView.text = @"Optionally enter comments here";
@@ -60,6 +62,9 @@
         
         //get saved comment
         self.commentTextView.text = self.userBeer.checkingEmployeeComments;
+        
+        //get saved checkingEmployee
+        //self.checkingEmployeeLabel.text = @"Checking Employee: %@",self.userBeer.checkingEmployee.name?
         
         //disable editing of comments field and hide markItDrankButton
         self.commentTextView.editable = NO;
