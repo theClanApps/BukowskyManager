@@ -13,7 +13,10 @@
 @interface BMCheckOffBeerViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *beerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateDrankLabel;
+@property (weak, nonatomic) IBOutlet UILabel *checkingEmployeeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UIButton *markItDrankButton;
 
 @end
 
@@ -27,18 +30,42 @@
 
 - (void)setup
 {
-    //Make the labels populate with beer name & user name
-    //[self.userNameLabel.text = self.userBeer.drinkingUser.name];
+    //Make the labels populate with beer name & user name, and checking employee
+    //[self.userNameLabel.text = self.userBeer.drinkingUser];
     //[self.beerNameLabel.text = self.userBeer.beer.beerName];
+    //[self.checkingEmployeeLabel.text = @"Checking Employee: %@", ...
     
-    //Set placeholder text
-    self.commentTextView.text = @"Optionally enter comments here";
-    self.commentTextView.textColor = [UIColor lightGrayColor];
-    self.commentTextView.delegate = self;
-    self.commentTextView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.commentTextView.layer.borderWidth = 1.0;
-    self.commentTextView.layer.cornerRadius = 8;
+    //Set dateFormatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
     
+    if (!self.userBeer.drank.boolValue)
+    {
+        //prepopulate with today's date
+        NSDate *currentTime = [NSDate date];
+        NSString *dateString = [dateFormatter stringFromDate: currentTime];
+        self.dateDrankLabel.text = dateString;
+        
+        //Set placeholder text
+        self.commentTextView.text = @"Optionally enter comments here";
+        self.commentTextView.textColor = [UIColor lightGrayColor];
+        self.commentTextView.delegate = self;
+        self.commentTextView.layer.borderColor = [[UIColor grayColor] CGColor];
+        self.commentTextView.layer.borderWidth = 1.0;
+        self.commentTextView.layer.cornerRadius = 8;
+    } else {
+        //get saved date
+        NSString *dateString = [dateFormatter stringFromDate: self.userBeer.dateDrank];
+        self.dateDrankLabel.text = dateString;
+        
+        //get saved comment
+        self.commentTextView.text = self.userBeer.checkingEmployeeComments;
+        
+        //disable editing of comments field and hide markItDrankButton
+        self.commentTextView.editable = NO;
+        self.markItDrankButton.hidden = YES;
+        
+    }
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
