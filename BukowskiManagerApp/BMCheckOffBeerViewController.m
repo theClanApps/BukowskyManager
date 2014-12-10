@@ -33,7 +33,7 @@
     //Make the labels populate with beer name & user name
     UserObject *drinkingUser = (UserObject *)self.userBeer.drinkingUser;
     [drinkingUser fetchIfNeeded];
-    self.userNameLabel.text = drinkingUser.name;
+    //self.userNameLabel.text = drinkingUser.name;
     
     BeerObject *beerObject = (BeerObject *)self.userBeer.beer;
     [beerObject fetchIfNeeded];
@@ -53,7 +53,7 @@
         //populate checkingEmployee with user logged in
         UserObject *checkingUser = (UserObject *)[PFUser currentUser];
         [checkingUser fetchIfNeeded];
-        self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
+        //self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
         
         //Set placeholder text
         self.commentTextView.text = @"Optionally enter comments here";
@@ -73,7 +73,7 @@
         //get saved checkingEmployee
         UserObject *checkingUser = (UserObject *)self.userBeer.checkingEmployee;
         [checkingUser fetchIfNeeded];
-        self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
+        //self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
         
         //disable editing of comments field and hide markItDrankButton
         self.commentTextView.editable = NO;
