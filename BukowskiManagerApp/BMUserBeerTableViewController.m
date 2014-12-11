@@ -80,22 +80,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedUserBeer = (UserBeerObject *)[self.userBeers objectAtIndex:indexPath.row];
-    
-//    NSLog(@"Beer selected: %@",beerSelected);
-//    if (![[self.userBeers objectAtIndex:indexPath.row] drank]) {
-//        NSLog(@"Not drank!");
-//    }
-//    
-//    if (!beerSelected.drank.boolValue) {
-//        NSLog(@"Not Drank!");
-//        [self performSegueWithIdentifier:@"checkOffBeerSegue" sender:self];
-//    } else {
-//        NSLog(@"Drank!");
-//        [self performSegueWithIdentifier:@"checkOffBeerSegue" sender:self];
-//        //[self performSegueWithIdentifier:@"goToCheckedOffBeerSegue" sender:self];
-//    }
-//    
-//    NSLog(@"Beer selected drank: %@", beerSelected.drank);
     [self performSegueWithIdentifier:@"checkOffBeerSegue" sender:self];
 
 }
@@ -108,18 +92,10 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
-        
         BMCheckOffBeerViewController *checkOffBeerVC = (BMCheckOffBeerViewController *)segue.destinationViewController;
-        //NSInteger offset = [self.tableView indexPathForCell:sender].row;
-        //checkOffBeerVC.userBeer = (UserBeerObject *)[self.userBeers objectAtIndex:offset];
         checkOffBeerVC.userBeer = self.selectedUserBeer;
-    } //else if ([[segue identifier] isEqualToString: @"goToCheckedOffBeerSegue"]) {
-    
-        
-        
-    //}
+    }
 }
 
 @end
