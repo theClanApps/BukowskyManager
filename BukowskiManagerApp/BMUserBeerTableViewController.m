@@ -23,8 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //For loadUserBeers, do I need to pass the User?
+    [self setup];
     [self loadUserBeers];
+}
+
+- (void)setup {
+    self.navigationItem.title = [NSString stringWithFormat:@"%@",self.user.name];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -33,7 +37,6 @@
 }
 
 - (void)loadUserBeers {
-    //Do I need to pass this method the User? Yes definitely. Help please, Nick.
     [[BMAccountManager sharedAccountManager] loadUserBeersForUser:self.user WithSuccess:^(NSArray *userBeers, NSError *error) {
         if (!error) {
             self.userBeers = userBeers;

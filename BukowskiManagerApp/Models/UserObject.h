@@ -8,14 +8,15 @@
 
 #import <Parse/Parse.h>
 
-@interface UserObject : PFUser
+@interface UserObject : PFUser <PFSubclassing>
 
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSDate *mugClubStartDate;
+@property (strong, nonatomic) NSDate *mugClubEndDate;
 
-@property (strong, nonatomic) NSNumber *userId;
-@property (strong, nonatomic) NSString *firstName;
-@property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) PFFile *userImage;
 @property (strong, nonatomic) NSDate *dateOfLastBeerDrank;
+
++ (NSString *)parseClassName;
 
 @end

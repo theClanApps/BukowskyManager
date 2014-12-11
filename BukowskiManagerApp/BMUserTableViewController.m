@@ -74,8 +74,8 @@
         cell = [nib objectAtIndex:0];
     }
     
-    cell.userLastNameLabel.text = ((PFUser *)self.users[indexPath.row])[@"name"];
-    //cell.userFirstNameLabel.text = [[self.users objectAtIndex:indexPath.row] firstName];
+    UserObject *userForCell = self.users[indexPath.row];
+    cell.userLastNameLabel.text = userForCell.name;
     
     return cell;
 }
@@ -90,7 +90,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedUser = self.users[indexPath.row];
-    NSLog(@"User selected: %@",((PFUser *)self.users[indexPath.row])[@"name"]);
+    NSLog(@"User selected: %@",self.selectedUser.name);
     [self performSegueWithIdentifier:@"selectUserSegue" sender:self];
 }
 
