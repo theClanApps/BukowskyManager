@@ -117,7 +117,7 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
     if ([self.commentTextView.text isEqualToString:kBMPlaceholderTextForComments]) {
         commentsToSave = @"";
     } else {
-        commentsToSave = kBMPlaceholderTextForComments;
+        commentsToSave = self.commentTextView.text;
     }
     
     NSLog(@"Comments to save: %@", commentsToSave);

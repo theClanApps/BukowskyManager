@@ -28,7 +28,7 @@
 }
 
 - (void)setup {
-    self.navigationItem.title = [NSString stringWithFormat:@"%@",self.user.name];
+    self.navigationItem.title = self.user.name;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
