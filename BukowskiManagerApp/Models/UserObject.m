@@ -10,4 +10,15 @@
 
 @implementation UserObject
 
+@dynamic name, mugClubStartDate, mugClubEndDate, userImage, dateOfLastBeerDrank;
+
++ (void)load
+{
+    [self registerSubclass];
+}
+
++ (NSString *)parseClassName {
+    return @"_User";
+}
+
 @end
