@@ -63,11 +63,9 @@
     } else
 #endif
     {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                         UIRemoteNotificationTypeAlert |
-                                                         UIRemoteNotificationTypeSound)];
     }
-    [[BMCSVParser sharedParser] loadCSVFileNamed:@"beers2"];
+    BMCSVParser *parser = [[BMCSVParser alloc] initWithParserType:BMParserTypeBeer];
+    [parser loadCSVFileNamed:@"beers2"];
     return YES;
 }
 

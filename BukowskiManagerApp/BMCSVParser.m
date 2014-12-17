@@ -9,6 +9,7 @@
 #import "BMCSVParser.h"
 #import <CHCSVParser/CHCSVParser.h>
 #import "BeerObject.h"
+#import "BeerStyle.h"
 
 NS_ENUM(NSInteger, BMBeerField) {
     BMBeerFieldBeerName = 0,
@@ -22,21 +23,27 @@ NS_ENUM(NSInteger, BMBeerField) {
     BMBeerFieldIsActive
 };
 
+NS_ENUM(NSInteger, BMStyleField) {
+    BMStyleFieldName = 0,
+    BMStyleFieldID,
+};
+
 @interface BMCSVParser() <CHCSVParserDelegate>
 @property (strong, nonatomic) BeerObject *beer;
+@property (strong, nonatomic) BeerStyle *style;
+@property (nonatomic) BMParserType type;
 @end
 
 @implementation BMCSVParser
 
-+ (id)sharedParser
-{
-    static BMCSVParser *_sharedParser = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedParser = [[BMCSVParser alloc] init];
-        _sharedParser.beers = [[NSMutableArray alloc] init];
-    });
-    return _sharedParser;
+- (instancetype)initWithParserType:(BMParserType)type {
+    self = [super init];
+    if (self) {
+        self.beers = [[NSMutableArray alloc] init];
+        self.styles = [[NSMutableArray alloc] init];
+        self.type = type;
+    }
+    return self;
 }
 
 - (void)loadCSVFileNamed:(NSString *)fileName {
@@ -54,35 +61,77 @@ NS_ENUM(NSInteger, BMBeerField) {
 
 - (void)parserDidEndDocument:(CHCSVParser *)parser {
     NSLog(@"finished CSV doc");
-    [self loadInitialBeers];
+    switch (self.type) {
+        case BMParserTypeBeer:
+            [self loadInitialBeers];
+            break;
+        case BMParserTypeStyle:
+            //
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)parser:(CHCSVParser *)parser didBeginLine:(NSUInteger)recordNumber {
     if (recordNumber > 1) {
-        self.beer = [[BeerObject alloc] init];
+        switch (self.type) {
+            case BMParserTypeBeer:
+                self.beer = [[BeerObject alloc] init];
+                break;
+            case BMParserTypeStyle:
+                self.style = [[BeerStyle alloc] init];
+                break;
+            default:
+                break;
+        }
     }
 }
 
 - (void)parser:(CHCSVParser *)parser didEndLine:(NSUInteger)recordNumber {
     if (recordNumber > 1) {
-        [self.beers addObject:self.beer];
+        switch (self.type) {
+            case BMParserTypeBeer:
+                [self.beers addObject:self.beer];
+                break;
+            case BMParserTypeStyle:
+                [self.styles addObject:self.style];
+                break;
+            default:
+                break;
+
+        }
     }
 }
 
 - (void)parser:(CHCSVParser *)parser didReadField:(NSString *)field atIndex:(NSInteger)fieldIndex {
-    switch (fieldIndex) {
-        case BMBeerFieldBeerName: self.beer.beerName = field; break;
-        case BMBeerFieldBreweryName: self.beer.brewery = field; break;
-        case BMBeerFieldStyle: self.beer.beerStyle = field; break;
-        case BMBeerFieldDescription: self.beer.beerDescription = field; break;
-        case BMBeerFieldABV: self.beer.abv = field; break;
-        case BMBeerFieldPrice: self.beer.price = field; break;
-        case BMBeerFieldSize: self.beer.size = field; break;
-        case BMBeerFieldNickname: self.beer.nickname = field; break;
-        case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? YES : NO;
-            break;
+    switch (self.type) {
+        case BMParserTypeBeer: {
+            switch (fieldIndex) {
+                case BMBeerFieldBeerName: self.beer.beerName = field; break;
+                case BMBeerFieldBreweryName: self.beer.brewery = field; break;
+                case BMBeerFieldStyle: self.beer.beerStyle = field; break;
+                case BMBeerFieldDescription: self.beer.beerDescription = field; break;
+                case BMBeerFieldABV: self.beer.abv = field; break;
+                case BMBeerFieldPrice: self.beer.price = field; break;
+                case BMBeerFieldSize: self.beer.size = field; break;
+                case BMBeerFieldNickname: self.beer.nickname = field; break;
+                case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? YES : NO;
+                    break;
+                default: break;
+            }
+        } break;
+        case BMParserTypeStyle: {
+            switch (fieldIndex) {
+                case BMStyleFieldName: self.style.styleName = field; break;
+                case BMStyleFieldID: self.style.styleID = field; break;
+                default: break;
+            }
+        } break;
         default: break;
     }
+
+
 }
 
 - (void)parser:(CHCSVParser *)parser didFailWithError:(NSError *)error {
