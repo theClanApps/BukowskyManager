@@ -23,14 +23,15 @@ static NSString * const kBMSegueToBeerVC = @"kBMSegueToBeerVC";
 @implementation BKSLoginViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[PFUser currentUser] fetch];
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        if ([[BMAccountManager sharedAccountManager] userIsApproved:[PFUser currentUser]]) {
-            [self performSegueWithIdentifier:kBMSegueToBeerVC sender:self];
-        } else {
-            [self performSegueWithIdentifier:kBMSequeToBlankVC sender:self];
+    [[PFUser currentUser] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+            if ([[BMAccountManager sharedAccountManager] userIsApproved:[PFUser currentUser]]) {
+                [self performSegueWithIdentifier:kBMSegueToBeerVC sender:self];
+            } else {
+                [self performSegueWithIdentifier:kBMSequeToBlankVC sender:self];
+            }
         }
-    }
+    }];
 }
 
 - (IBAction)loginButtonPressed:(id)sender {

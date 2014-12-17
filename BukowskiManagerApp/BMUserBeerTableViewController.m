@@ -41,7 +41,6 @@
         if (!error) {
             self.userBeers = userBeers;
             [self.tableView reloadData];
-            NSLog(@"User Beers: %@", userBeers);
         }
     }];
 }
