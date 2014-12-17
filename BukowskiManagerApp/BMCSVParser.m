@@ -54,7 +54,6 @@ NS_ENUM(NSInteger, BMBeerField) {
 
 - (void)parserDidEndDocument:(CHCSVParser *)parser {
     NSLog(@"finished CSV doc");
-    NSLog(@"%@",self.beers);
     [self loadInitialBeers];
 }
 
