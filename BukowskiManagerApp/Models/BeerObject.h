@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+@class BeerStyle;
 
 @interface BeerObject : PFObject <PFSubclassing>
 
@@ -18,9 +19,12 @@
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) NSString *size;
 @property (strong, nonatomic) NSString *nickname;
+@property (strong, nonatomic) NSString *styleID;
 @property (strong, nonatomic) PFFile *bottleImage;
 @property (strong, nonatomic) PFFile *glassImage;
+@property (strong, nonatomic) BeerStyle *style;
 @property (nonatomic, assign) BOOL isActive;
+
 
 + (NSString *)parseClassName;
 

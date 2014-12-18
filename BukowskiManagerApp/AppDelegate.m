@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-#import "BMCSVParser.h"
+#import "BMBeerGenerator.h"
 
 @implementation AppDelegate
 
@@ -64,8 +64,10 @@
 #endif
     {
     }
-    BMCSVParser *parser = [[BMCSVParser alloc] initWithParserType:BMParserTypeBeer];
-    [parser loadCSVFileNamed:@"beers2"];
+
+    BMBeerGenerator *beerGen = [[BMBeerGenerator alloc] init];
+    [beerGen generateBeers];
+
     return YES;
 }
 

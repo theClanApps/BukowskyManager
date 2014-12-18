@@ -20,7 +20,8 @@ NS_ENUM(NSInteger, BMBeerField) {
     BMBeerFieldPrice,
     BMBeerFieldSize,
     BMBeerFieldNickname,
-    BMBeerFieldIsActive
+    BMBeerFieldIsActive,
+    BMBeerFieldStyleID,
 };
 
 NS_ENUM(NSInteger, BMStyleField) {
@@ -61,16 +62,7 @@ NS_ENUM(NSInteger, BMStyleField) {
 
 - (void)parserDidEndDocument:(CHCSVParser *)parser {
     NSLog(@"finished CSV doc");
-    switch (self.type) {
-        case BMParserTypeBeer:
-            [self loadInitialBeers];
-            break;
-        case BMParserTypeStyle:
-            //
-            break;
-        default:
-            break;
-    }
+    [self.delegate parserDidFinishParsingDocument:self];
 }
 
 - (void)parser:(CHCSVParser *)parser didBeginLine:(NSUInteger)recordNumber {
@@ -116,65 +108,25 @@ NS_ENUM(NSInteger, BMStyleField) {
                 case BMBeerFieldPrice: self.beer.price = field; break;
                 case BMBeerFieldSize: self.beer.size = field; break;
                 case BMBeerFieldNickname: self.beer.nickname = field; break;
-                case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? YES : NO;
-                    break;
+                case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? YES : NO; break;
+                case BMBeerFieldStyleID: self.beer.styleID = field; break;
                 default: break;
             }
         } break;
         case BMParserTypeStyle: {
             switch (fieldIndex) {
-                case BMStyleFieldName: self.style.styleName = field; break;
+                case BMStyleFieldName: self.style.styleName = field; NSLog(@"%@",field);
+                    break;
                 case BMStyleFieldID: self.style.styleID = field; break;
                 default: break;
             }
         } break;
         default: break;
     }
-
-
 }
 
 - (void)parser:(CHCSVParser *)parser didFailWithError:(NSError *)error {
     NSLog(@"Parsing CSV failed with Error: %@", error);
-}
-
-- (void)loadInitialBeers
-{
-    PFQuery *query = [PFQuery queryWithClassName:@"BeerObject"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            if (objects.count > 0) {
-                return;
-            } else {
-                [self uploadBeers];
-            }
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-}
-
-- (void)uploadBeers {
-    for (BeerObject *beer in self.beers) {
-        UIImage *image = [UIImage imageNamed:beer.nickname];
-        NSData *imageData = UIImagePNGRepresentation(image);
-        PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"%@.png",beer.nickname] data:imageData];
-        
-        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                beer.bottleImage = imageFile;
-                [beer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSLog(@"Saved Beer in background");
-                    } else {
-                        NSLog(@"Error: %@", error);
-                    }
-                }];
-            } else {
-                NSLog(@"Error saving image: %@",error);
-            }
-        }];
-    }
 }
 
 @end

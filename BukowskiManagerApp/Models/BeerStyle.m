@@ -9,7 +9,7 @@
 #import "BeerStyle.h"
 
 @implementation BeerStyle
-@dynamic styleID, styleName;
+@dynamic styleID, styleName, styleImage;
 
 + (void)load {
     [self registerSubclass];

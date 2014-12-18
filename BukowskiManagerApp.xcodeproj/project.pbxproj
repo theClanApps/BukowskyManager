@@ -12,7 +12,6 @@
 		490ED7501A2E7F7700FC0019 /* BMPendingApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490ED74F1A2E7F7700FC0019 /* BMPendingApprovalViewController.m */; };
 		4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914EA0A1A0FC121003D4FBB /* BeerObject.m */; };
 		4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4914EA221A0FC9C5003D4FBB /* beers.csv */; };
-		4916C0691A1C3FFE00DA65D1 /* beers2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4916C0681A1C3FFE00DA65D1 /* beers2.csv */; };
 		4966FA521A0EED9700EE0824 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA511A0EED9700EE0824 /* main.m */; };
 		4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA541A0EED9700EE0824 /* AppDelegate.m */; };
 		4966FA5B1A0EED9700EE0824 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA591A0EED9700EE0824 /* Main.storyboard */; };
@@ -21,8 +20,13 @@
 		4966FA6C1A0EED9700EE0824 /* BukowskiManagerAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA6B1A0EED9700EE0824 /* BukowskiManagerAppTests.m */; };
 		4971E70F1A4124A400DB3BE1 /* Styles.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4971E70E1A4124A400DB3BE1 /* Styles.csv */; };
 		4971E7121A41285E00DB3BE1 /* BeerStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971E7111A41285E00DB3BE1 /* BeerStyle.m */; };
+		4971E7211A424C2300DB3BE1 /* lager.png in Resources */ = {isa = PBXBuildFile; fileRef = 4971E71E1A424C2300DB3BE1 /* lager.png */; };
+		4971E7221A424C2300DB3BE1 /* stout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4971E71F1A424C2300DB3BE1 /* stout.png */; };
+		4971E7231A424C2300DB3BE1 /* ale.png in Resources */ = {isa = PBXBuildFile; fileRef = 4971E7201A424C2300DB3BE1 /* ale.png */; };
+		4971E7261A424D1D00DB3BE1 /* BMBeerGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */; };
 		497A2F7D1A0FF165006ED419 /* BMCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 497A2F7C1A0FF165006ED419 /* BMCSVParser.m */; };
 		49D325D51A11AA8C003769CA /* BMAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D325D41A11AA8C003769CA /* BMAccountManager.m */; };
+		49E68E0A1A425A1C00EED67D /* beers3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 49E68E091A425A1C00EED67D /* beers3.csv */; };
 		638678121A1046D5008259DC /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 638678111A1046D5008259DC /* UserObject.m */; };
 		638678151A1049E1008259DC /* BMUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638678141A1049E1008259DC /* BMUserTableViewController.m */; };
 		638678171A1058D5008259DC /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638678161A1058D5008259DC /* UserTableViewCell.xib */; };
@@ -62,7 +66,6 @@
 		4914EA091A0FC121003D4FBB /* BeerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerObject.h; sourceTree = "<group>"; };
 		4914EA0A1A0FC121003D4FBB /* BeerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerObject.m; sourceTree = "<group>"; };
 		4914EA221A0FC9C5003D4FBB /* beers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers.csv; sourceTree = "<group>"; };
-		4916C0681A1C3FFE00DA65D1 /* beers2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers2.csv; sourceTree = "<group>"; };
 		4966FA4C1A0EED9700EE0824 /* BukowskiManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BukowskiManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4966FA501A0EED9700EE0824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4966FA511A0EED9700EE0824 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,10 +80,16 @@
 		4971E70E1A4124A400DB3BE1 /* Styles.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Styles.csv; sourceTree = "<group>"; };
 		4971E7101A41285E00DB3BE1 /* BeerStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerStyle.h; sourceTree = "<group>"; };
 		4971E7111A41285E00DB3BE1 /* BeerStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerStyle.m; sourceTree = "<group>"; };
+		4971E71E1A424C2300DB3BE1 /* lager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lager.png; sourceTree = "<group>"; };
+		4971E71F1A424C2300DB3BE1 /* stout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stout.png; sourceTree = "<group>"; };
+		4971E7201A424C2300DB3BE1 /* ale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ale.png; sourceTree = "<group>"; };
+		4971E7241A424D1D00DB3BE1 /* BMBeerGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMBeerGenerator.h; path = CSVParsing/BMBeerGenerator.h; sourceTree = "<group>"; };
+		4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BMBeerGenerator.m; path = CSVParsing/BMBeerGenerator.m; sourceTree = "<group>"; };
 		497A2F7B1A0FF165006ED419 /* BMCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMCSVParser.h; sourceTree = "<group>"; };
 		497A2F7C1A0FF165006ED419 /* BMCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMCSVParser.m; sourceTree = "<group>"; };
 		49D325D31A11AA8C003769CA /* BMAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMAccountManager.h; path = "BukowskiManagerApp/Web Services/BMAccountManager.h"; sourceTree = SOURCE_ROOT; };
 		49D325D41A11AA8C003769CA /* BMAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BMAccountManager.m; path = "BukowskiManagerApp/Web Services/BMAccountManager.m"; sourceTree = SOURCE_ROOT; };
+		49E68E091A425A1C00EED67D /* beers3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = beers3.csv; sourceTree = "<group>"; };
 		638678101A1046D5008259DC /* UserObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserObject.h; sourceTree = "<group>"; };
 		638678111A1046D5008259DC /* UserObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserObject.m; sourceTree = "<group>"; };
 		638678131A1049E1008259DC /* BMUserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMUserTableViewController.h; sourceTree = "<group>"; };
@@ -163,6 +172,9 @@
 		4914EA0D1A0FC12F003D4FBB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4971E71E1A424C2300DB3BE1 /* lager.png */,
+				4971E71F1A424C2300DB3BE1 /* stout.png */,
+				4971E7201A424C2300DB3BE1 /* ale.png */,
 				63F78AB71A0FE2D800027857 /* Blue Moon White.png */,
 				63F78AB91A0FE30900027857 /* Boston Lager.png */,
 				63F78ABB1A0FE35400027857 /* Dogfish 90.png */,
@@ -230,7 +242,7 @@
 		4966FA4F1A0EED9700EE0824 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4916C0681A1C3FFE00DA65D1 /* beers2.csv */,
+				49E68E091A425A1C00EED67D /* beers3.csv */,
 				4971E70E1A4124A400DB3BE1 /* Styles.csv */,
 				6386781B1A105D2C008259DC /* face.png */,
 				4914EA221A0FC9C5003D4FBB /* beers.csv */,
@@ -260,6 +272,8 @@
 		497A2F7E1A0FF16D006ED419 /* CSVParsing */ = {
 			isa = PBXGroup;
 			children = (
+				4971E7241A424D1D00DB3BE1 /* BMBeerGenerator.h */,
+				4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */,
 				497A2F7B1A0FF165006ED419 /* BMCSVParser.h */,
 				497A2F7C1A0FF165006ED419 /* BMCSVParser.m */,
 			);
@@ -365,12 +379,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E68E0A1A425A1C00EED67D /* beers3.csv in Resources */,
 				4966FA5B1A0EED9700EE0824 /* Main.storyboard in Resources */,
 				63F78ACA1A0FE6C500027857 /* Chimay Blue.png in Resources */,
-				4916C0691A1C3FFE00DA65D1 /* beers2.csv in Resources */,
 				4914EA231A0FC9C5003D4FBB /* beers.csv in Resources */,
+				4971E7211A424C2300DB3BE1 /* lager.png in Resources */,
 				4966FA601A0EED9700EE0824 /* LaunchScreen.xib in Resources */,
 				638678171A1058D5008259DC /* UserTableViewCell.xib in Resources */,
+				4971E7221A424C2300DB3BE1 /* stout.png in Resources */,
 				63F78ABE1A0FE41400027857 /* Guiness Draught.png in Resources */,
 				63F78AC01A0FE44500027857 /* Lagunitas IPA.png in Resources */,
 				63F78ABA1A0FE30900027857 /* Boston Lager.png in Resources */,
@@ -378,6 +394,7 @@
 				63F78AC81A0FE56200027857 /* Newcastle Brown.png in Resources */,
 				6386781C1A105D2C008259DC /* face.png in Resources */,
 				4971E70F1A4124A400DB3BE1 /* Styles.csv in Resources */,
+				4971E7231A424C2300DB3BE1 /* ale.png in Resources */,
 				63F78AC61A0FE51800027857 /* Yuengling Lager.png in Resources */,
 				63F78ABC1A0FE35400027857 /* Dogfish 90.png in Resources */,
 				4966FA5D1A0EED9700EE0824 /* Images.xcassets in Resources */,
@@ -438,6 +455,7 @@
 				639A87001A1A9DF500D340C9 /* BMUserBeerTableViewController.m in Sources */,
 				490ED7501A2E7F7700FC0019 /* BMPendingApprovalViewController.m in Sources */,
 				490ED74D1A2E7A5500FC0019 /* BKSLoginViewController.m in Sources */,
+				4971E7261A424D1D00DB3BE1 /* BMBeerGenerator.m in Sources */,
 				4914EA0B1A0FC121003D4FBB /* BeerObject.m in Sources */,
 				4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */,
 				4971E7121A41285E00DB3BE1 /* BeerStyle.m in Sources */,

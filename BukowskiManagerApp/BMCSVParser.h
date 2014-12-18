@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BMCSVParserDelegate;
+
 typedef NS_ENUM(NSInteger, BMParserType) {
     BMParserTypeBeer = 0,
     BMParserTypeStyle,
@@ -16,8 +18,15 @@ typedef NS_ENUM(NSInteger, BMParserType) {
 @interface BMCSVParser : NSObject
 @property (strong, nonatomic) NSMutableArray *beers;
 @property (strong, nonatomic) NSMutableArray *styles;
+@property (weak, nonatomic) id<BMCSVParserDelegate> delegate;
 
 - (instancetype)initWithParserType:(BMParserType)type;
 - (void)loadCSVFileNamed:(NSString *)fileName;
+
+@end
+
+@protocol BMCSVParserDelegate <NSObject>
+
+- (void)parserDidFinishParsingDocument:(BMCSVParser *)parser;
 
 @end
