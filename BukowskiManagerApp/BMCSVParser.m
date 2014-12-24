@@ -108,7 +108,7 @@ NS_ENUM(NSInteger, BMStyleField) {
                 case BMBeerFieldPrice: self.beer.price = field; break;
                 case BMBeerFieldSize: self.beer.size = field; break;
                 case BMBeerFieldNickname: self.beer.nickname = field; break;
-                case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? [NSNumber numberWithBool:"YES"] : [NSNumber numberWithBool:"NO"]; break;
+                case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO]; break;
                 case BMBeerFieldStyleID: self.beer.styleID = field; break;
                 default: break;
             }
