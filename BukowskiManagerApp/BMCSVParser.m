@@ -27,6 +27,7 @@ NS_ENUM(NSInteger, BMBeerField) {
 NS_ENUM(NSInteger, BMStyleField) {
     BMStyleFieldName = 0,
     BMStyleFieldID,
+    BMStyleFieldDescription,
 };
 
 @interface BMCSVParser() <CHCSVParserDelegate>
@@ -118,6 +119,7 @@ NS_ENUM(NSInteger, BMStyleField) {
                 case BMStyleFieldName: self.style.styleName = field; NSLog(@"%@",field);
                     break;
                 case BMStyleFieldID: self.style.styleID = field; break;
+                case BMStyleFieldDescription: self.style.styleDescription = field; break;
                 default: break;
             }
         } break;
