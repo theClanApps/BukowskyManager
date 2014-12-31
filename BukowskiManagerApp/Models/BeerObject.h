@@ -23,7 +23,7 @@
 @property (strong, nonatomic) PFFile *bottleImage;
 @property (strong, nonatomic) PFFile *glassImage;
 @property (strong, nonatomic) BeerStyle *style;
-@property (nonatomic, assign) BOOL isActive;
+@property (nonatomic, assign) NSNumber *isActive;
 
 
 + (NSString *)parseClassName;
