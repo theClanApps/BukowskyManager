@@ -123,6 +123,11 @@
     [PFUser logOut];
 }
 
+- (BOOL)userIsLoggedIn {
+    PFUser *user = [PFUser currentUser];
+    return user && [PFFacebookUtils isLinkedWithUser:user];
+}
+
 - (BOOL)userIsApproved:(PFUser *)user {
     NSNumber *val = user[@"approved"];
     return val.boolValue;

@@ -26,4 +26,6 @@ typedef void (^BKSErrorBlock) (NSError *error);
 - (void)logout;
 
 - (BOOL)userIsApproved:(PFUser *)user;
+- (BOOL)userIsLoggedIn;
+
 @end

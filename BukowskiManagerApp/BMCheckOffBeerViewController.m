@@ -26,89 +26,40 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     [self setup];
 }
 
-- (void)setup
-{
+- (void)setup {
     //Make the labels populate with beer name & user name
     UserObject *drinkingUser = (UserObject *)self.userBeer.drinkingUser;
-    [drinkingUser fetchIfNeeded];
-    self.userNameLabel.text = drinkingUser.name;
-    
+    [drinkingUser fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            self.userNameLabel.text = drinkingUser.name;
+            [self fetchUserBeerObject];
+        } else {
+            // DO NOTHING
+        }
+    }];
+}
+
+- (void)fetchUserBeerObject {
     BeerObject *beerObject = (BeerObject *)self.userBeer.beer;
-    [beerObject fetchIfNeeded];
-    self.beerNameLabel.text = beerObject.beerName;
-    
-    //Set dateFormatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    
-    if (!self.userBeer.drank.boolValue)
-    {
-        //prepopulate with today's date
-        NSDate *currentTime = [NSDate date];
-        NSString *dateString = [dateFormatter stringFromDate: currentTime];
-        self.dateDrankLabel.text = dateString;
-        
-        //populate checkingEmployee with user logged in
-        UserObject *checkingUser = [UserObject currentUser];
-        [checkingUser fetchIfNeeded];
+    [beerObject fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        self.beerNameLabel.text = beerObject.beerName;
+        if (!self.userBeer.drank.boolValue) {
+            [self configureForMarkingBeerDrank];
+        } else {
+            [self configureForMarkedDrank];
+        }
+    }];
+}
+
+- (void)fetchCheckingUser:(PFUser *)user {
+    UserObject *checkingUser = (UserObject *)user;
+    [checkingUser fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
-        
-        //Set placeholder text
-        self.commentTextView.text = kBMPlaceholderTextForComments;
-        self.commentTextView.textColor = [UIColor lightGrayColor];
-        self.commentTextView.delegate = self;
-        self.commentTextView.layer.borderColor = [[UIColor grayColor] CGColor];
-        self.commentTextView.layer.borderWidth = 1.0;
-        self.commentTextView.layer.cornerRadius = 8;
-    } else {
-        //get saved date
-        NSString *dateString = [dateFormatter stringFromDate: self.userBeer.dateDrank];
-        self.dateDrankLabel.text = dateString;
-        
-        //get saved comment
-        self.commentTextView.text = self.userBeer.checkingEmployeeComments;
-        
-        //get saved checkingEmployee
-        UserObject *checkingUser = (UserObject *)self.userBeer.checkingEmployee;
-        [checkingUser fetchIfNeeded];
-        self.checkingEmployeeLabel.text = [NSString stringWithFormat:@"Checking Employee: %@",checkingUser.name];
-        
-        //disable editing of comments field and hide markItDrankButton
-        self.commentTextView.editable = NO;
-        self.markItDrankButton.hidden = YES;
-        
-    }
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-        if ([self.commentTextView.text isEqualToString:kBMPlaceholderTextForComments]) {
-            self.commentTextView.text = @"";
-            self.commentTextView.textColor = [UIColor blackColor];
-        }
-        [self.commentTextView becomeFirstResponder];
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-        if ([self.commentTextView.text isEqualToString:@""]) {
-            self.commentTextView.text = kBMPlaceholderTextForComments;
-            self.commentTextView.textColor = [UIColor lightGrayColor];
-        }
-        [self.commentTextView resignFirstResponder];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-        UITouch *touch = [[event allTouches] anyObject];
-        if ([self.commentTextView isFirstResponder] && [touch view] != self.commentTextView) {
-            [self.commentTextView resignFirstResponder];
-        }
-        [super touchesBegan:touches withEvent:event];
+    }];
 }
 
 - (IBAction)markItDrankButtonPressed:(id)sender {
@@ -129,6 +80,78 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
             NSLog(@"Error checking beer: %@", error);
         }
     }];
+}
+
+#pragma mark - Helpers
+
+- (NSDateFormatter *)dateFormatterForDateDrank {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+    return dateFormatter;
+}
+
+- (void)setupTextView {
+    self.commentTextView.text = kBMPlaceholderTextForComments;
+    self.commentTextView.textColor = [UIColor lightGrayColor];
+    self.commentTextView.delegate = self;
+    self.commentTextView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.commentTextView.layer.borderWidth = 1.0;
+    self.commentTextView.layer.cornerRadius = 8;
+}
+
+- (void)configureForMarkingBeerDrank {
+    //prepopulate with today's date
+    NSDate *currentTime = [NSDate date];
+    NSString *dateString = [[self dateFormatterForDateDrank] stringFromDate:currentTime];
+    self.dateDrankLabel.text = dateString;
+
+    [self fetchCheckingUser:[PFUser currentUser]];
+
+    [self setupTextView];
+}
+
+- (void)configureForMarkedDrank {
+    //get saved date
+    NSString *dateString = [[self dateFormatterForDateDrank] stringFromDate: self.userBeer.dateDrank];
+    self.dateDrankLabel.text = dateString;
+
+    //get saved comment
+    self.commentTextView.text = self.userBeer.checkingEmployeeComments;
+
+    [self fetchCheckingUser:self.userBeer.checkingEmployee];
+
+    //disable editing of comments field and hide markItDrankButton
+    self.commentTextView.editable = NO;
+    self.markItDrankButton.hidden = YES;
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([self.commentTextView.text isEqualToString:kBMPlaceholderTextForComments]) {
+        self.commentTextView.text = @"";
+        self.commentTextView.textColor = [UIColor blackColor];
+    }
+    [self.commentTextView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([self.commentTextView.text isEqualToString:@""]) {
+        self.commentTextView.text = kBMPlaceholderTextForComments;
+        self.commentTextView.textColor = [UIColor lightGrayColor];
+    }
+    [self.commentTextView resignFirstResponder];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.commentTextView isFirstResponder] && [touch view] != self.commentTextView) {
+        [self.commentTextView resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end
