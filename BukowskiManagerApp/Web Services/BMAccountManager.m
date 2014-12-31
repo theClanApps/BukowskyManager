@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "UserBeerObject.h"
 #import "BeerObject.h"
+#import "UserObject.h"
 
 @interface BMAccountManager ()
 @property (strong, nonatomic) NSArray *faceBookPermissions;
@@ -50,10 +51,10 @@
         } else {
             if (user.isNew) {
                 NSLog(@"User with facebook signed up and logged in!");
-                user[@"approved"] = @NO;
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Added approved to user object");
+                        [self configureParseUserObject:(UserObject *)user];
                     } else {
                         NSLog(@"Error saving approved to user object: %@",error);
                     }
@@ -122,9 +123,35 @@
     [PFUser logOut];
 }
 
+- (BOOL)userIsLoggedIn {
+    PFUser *user = [PFUser currentUser];
+    return user && [PFFacebookUtils isLinkedWithUser:user];
+}
+
 - (BOOL)userIsApproved:(PFUser *)user {
     NSNumber *val = user[@"approved"];
     return val.boolValue;
+}
+
+- (void)configureParseUserObject:(UserObject *)user {
+    FBRequest *request = [FBRequest requestForMe];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+
+            user.name = [userData objectForKey:@"name"];
+            user.profilePictureURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1",[userData objectForKey:@"id"]];
+            user.approved = @NO;
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Added name, profilePicture to user object");
+                } else {
+                    NSLog(@"Error saving name to user object: %@",error);
+                }
+            }];
+        }
+    }];
 }
 
 @end
