@@ -31,28 +31,11 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 }
 
 - (void)setup {
-    //Make the labels populate with beer name & user name
-    UserObject *drinkingUser = (UserObject *)self.userBeer.drinkingUser;
-    [drinkingUser fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (!error) {
-            self.userNameLabel.text = drinkingUser.name;
-            [self fetchUserBeerObject];
-        } else {
-            // DO NOTHING
-        }
-    }];
-}
-
-- (void)fetchUserBeerObject {
-    BeerObject *beerObject = (BeerObject *)self.userBeer.beer;
-    [beerObject fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        self.beerNameLabel.text = beerObject.beerName;
-        if (!self.userBeer.drank.boolValue) {
-            [self configureForMarkingBeerDrank];
-        } else {
-            [self configureForMarkedDrank];
-        }
-    }];
+    if (!self.userBeer.drank.boolValue) {
+        [self configureForMarkingBeerDrank];
+    } else {
+        [self configureForMarkedDrank];
+    }
 }
 
 - (void)fetchCheckingUser:(PFUser *)user {
@@ -100,6 +83,9 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 }
 
 - (void)configureForMarkingBeerDrank {
+    self.userNameLabel.text = ((UserObject *)self.userBeer.drinkingUser).name;
+    self.beerNameLabel.text = self.userBeer.beer.beerName;
+
     //prepopulate with today's date
     NSDate *currentTime = [NSDate date];
     NSString *dateString = [[self dateFormatterForDateDrank] stringFromDate:currentTime];
@@ -111,6 +97,9 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 }
 
 - (void)configureForMarkedDrank {
+    self.userNameLabel.text = ((UserObject *)self.userBeer.drinkingUser).name;
+    self.beerNameLabel.text = self.userBeer.beer.beerName;
+
     //get saved date
     NSString *dateString = [[self dateFormatterForDateDrank] stringFromDate: self.userBeer.dateDrank];
     self.dateDrankLabel.text = dateString;

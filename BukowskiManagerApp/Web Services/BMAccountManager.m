@@ -86,12 +86,29 @@
 - (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block {
     PFQuery *query = [PFQuery queryWithClassName:@"UserBeerObject"];
     [query whereKey:@"drinkingUser" equalTo:user];
-    [query includeKey:@"beer"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *userBeerObjects, NSError *error) {
         if (!error) {
-            if (block) {
-                block(objects, nil);
-            }
+            [PFObject fetchAllInBackground:[self beerObjectsFromUserBeerObjects:userBeerObjects] block:^(NSArray *beerObjects, NSError *error) {
+                if (!error) {
+                    [PFObject fetchAllInBackground:[self stylesContainedInBeers:beerObjects] block:^(NSArray *styles, NSError *error) {
+                        if (!error) {
+                            [PFObject fetchAllInBackground:[self drinkingUsersFromUserBeerObjects:userBeerObjects] block:^(NSArray *drinkingUsers, NSError *error) {
+                                if (!error) {
+                                    if (block) {
+                                        block(userBeerObjects, nil);
+                                    }
+                                } else {
+                                    NSLog(@"Error: %@", error);
+                                }
+                            }];
+                        } else {
+                            NSLog(@"Error: %@", error);
+                        }
+                    }];
+                } else {
+                    NSLog(@"Error: %@", error);
+                }
+            }];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -152,6 +169,40 @@
             }];
         }
     }];
+}
+
+#pragma mark - Helpers
+
+- (NSArray *)beerObjectsFromUserBeerObjects:(NSArray *)userBeerObjects {
+    NSMutableArray *beerObjects = [[NSMutableArray alloc] init];
+    for (UserBeerObject *userBeerObject in userBeerObjects) {
+        [beerObjects addObject:userBeerObject.beer];
+    }
+    return [beerObjects copy];
+}
+
+- (NSArray *)stylesContainedInBeers:(NSArray *)beers {
+    NSMutableArray *styleArray = [[NSMutableArray alloc] init];
+    for (BeerObject *beer in beers) {
+        [styleArray addObject:beer.style];
+    }
+    return [styleArray copy];
+}
+
+- (NSArray *)drinkingUsersFromUserBeerObjects:(NSArray *)userBeerObjects {
+    NSMutableArray *drinkingUsers = [[NSMutableArray alloc] init];
+    for (UserBeerObject *userBeerObject in userBeerObjects) {
+        [drinkingUsers addObject:userBeerObject.drinkingUser];
+    }
+    return [drinkingUsers copy];
+}
+
+- (NSArray *)checkingEmployeesFromUserBeerObjects:(NSArray *)userBeerObjects {
+    NSMutableArray *checkingEmployees = [[NSMutableArray alloc] init];
+    for (UserBeerObject *userBeerObject in userBeerObjects) {
+        [checkingEmployees addObject:userBeerObject.checkingEmployee];
+    }
+    return [checkingEmployees copy];
 }
 
 @end
