@@ -127,6 +127,9 @@
         if (succeeded) {
             if (completion) {
                 completion(nil, userBeer);
+                [self sendPushNotification:userBeer withCompletion:^(NSError *error, NSString *result) {
+                    NSLog(@"Push notification succeeded!");
+                }];
             }
         } else {
             if (completion) {
@@ -203,6 +206,28 @@
         [checkingEmployees addObject:userBeerObject.checkingEmployee];
     }
     return [checkingEmployees copy];
+}
+
+- (void)sendPushNotification:(UserBeerObject *)userBeer
+              withCompletion:(void(^)(NSError *error, NSString *result))completion {
+
+    [PFCloud callFunctionInBackground:@"sendPushNotificationToUserWhenBeerIsMarkedDrank"
+                       withParameters:@{
+                                        @"user" : userBeer.drinkingUser.username,
+                                        @"beerName" : userBeer.beer.beerName,
+                                        }
+                                block:^(NSString *result, NSError *error) {
+                                    if (!error) {
+                                        if (completion) {
+                                            completion(nil, result);
+                                        }
+                                    } else {
+                                        if (completion) {
+                                            completion(error, nil);
+                                        }
+                                    }
+                                }];
+     
 }
 
 @end
