@@ -12,8 +12,7 @@
 @implementation UserBeerObject
 @dynamic drinkingUser, beer, drank, dateDrank, checkingEmployee, checkingEmployeeComments;
 
-+ (void)load
-{
++ (void)load {
     [self registerSubclass];
 }
 

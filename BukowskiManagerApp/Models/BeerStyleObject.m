@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 The Clan. All rights reserved.
 //
 
-#import "BeerStyle.h"
+#import "BeerStyleObject.h"
 
-@implementation BeerStyle
-@dynamic styleID, styleName, styleImage;
+@implementation BeerStyleObject
+@dynamic styleID, styleName, styleDescription, styleImage;
 
 + (void)load {
     [self registerSubclass];
 }
 
 + (NSString *)parseClassName {
-    return @"BeerStyle";
+    return @"BeerStyleObject";
 }
 
 

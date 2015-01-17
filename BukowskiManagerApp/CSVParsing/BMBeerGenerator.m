@@ -9,7 +9,7 @@
 #import "BMBeerGenerator.h"
 #import "BMCSVParser.h"
 #import "BeerObject.h"
-#import "BeerStyle.h"
+#import "BeerStyleObject.h"
 
 @interface BMBeerGenerator () <BMCSVParserDelegate>
 @property (strong, nonatomic) BMCSVParser *styleParser;
@@ -52,7 +52,7 @@
 
 - (void)uploadBeers {
     NSMutableArray *imageFiles = [[NSMutableArray alloc] init];
-    for (BeerStyle *style in self.styleParser.styles) {
+    for (BeerStyleObject *style in self.styleParser.styles) {
         UIImage *styleImage = [UIImage imageNamed:style.styleName];
         NSData *styleImageData = UIImagePNGRepresentation(styleImage);
         PFFile *styleImageFile = [PFFile fileWithName:[NSString stringWithFormat:@"%@.png",style.styleName] data:styleImageData];
@@ -62,7 +62,7 @@
     [PFObject saveAllInBackground:[imageFiles copy] block:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             int count = 0;
-            for (BeerStyle *style in self.styleParser.styles) {
+            for (BeerStyleObject *style in self.styleParser.styles) {
                 style.styleImage = ((PFFile *)imageFiles[count]);
                 count++;
             }
@@ -71,42 +71,49 @@
                     NSLog(@"Saved Styles in background");
                     [self saveBeers];
                 } else {
-                    NSLog(@"Error: %@", error);
+                    NSLog(@"Error Saving Styles: %@", error);
                 }
             }];
 
         } else {
-            NSLog(@"Error saving image: %@",error);
+            NSLog(@"Error saving Style image: %@",error);
         }
     }];
 }
 
 - (void)saveBeers {
-    for (BeerObject *beer in self.beerParser.beers) {
-        UIImage *image = [UIImage imageNamed:beer.nickname];
-        NSData *imageData = UIImagePNGRepresentation(image);
-        PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"%@.png",beer.nickname] data:imageData];
+    NSMutableArray *imageFiles = [[NSMutableArray alloc] init];
 
-        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                beer.bottleImage = imageFile;
-                beer.style = [self styleForStyleID:beer.styleID];
-                [beer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSLog(@"Saved Beer in background");
-                    } else {
-                        NSLog(@"Error: %@", error);
-                    }
-                }];
-            } else {
-                NSLog(@"Error saving image: %@",error);
-            }
-        }];
+    for (BeerObject *beer in self.beerParser.beers) {
+        UIImage *image = [UIImage imageNamed:beer.beerNickname];
+        NSData *imageData = UIImagePNGRepresentation(image);
+        PFFile *beerImageFile = [PFFile fileWithName:[NSString stringWithFormat:@"%@.png",beer.beerNickname] data:imageData];
+        [imageFiles addObject:beerImageFile];
     }
+
+    [PFObject saveAllInBackground:[imageFiles copy] block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSInteger count = 0;
+            for (BeerObject *beer in self.beerParser.beers) {
+                beer.bottleImage = imageFiles[count];
+                beer.style = [self styleForStyleID:beer.styleID];
+                count++;
+            }
+            [PFObject saveAllInBackground:[self.beerParser.beers copy] block:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Saved Beers in background");
+                } else {
+                    NSLog(@"Error Saving Beers: %@", error);
+                }
+            }];
+        } else {
+            NSLog(@"Error saving Beer image: %@",error);
+        }
+    }];
 }
 
-- (BeerStyle *)styleForStyleID:(NSString *)styleID {
-    for (BeerStyle *style in self.styleParser.styles) {
+- (BeerStyleObject *)styleForStyleID:(NSString *)styleID {
+    for (BeerStyleObject *style in self.styleParser.styles) {
         if ([style.styleID isEqualToString:styleID]) {
             return style;
         }

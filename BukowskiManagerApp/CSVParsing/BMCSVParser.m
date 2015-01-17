@@ -9,7 +9,7 @@
 #import "BMCSVParser.h"
 #import <CHCSVParser/CHCSVParser.h>
 #import "BeerObject.h"
-#import "BeerStyle.h"
+#import "BeerStyleObject.h"
 
 NS_ENUM(NSInteger, BMBeerField) {
     BMBeerFieldBeerName = 0,
@@ -32,7 +32,7 @@ NS_ENUM(NSInteger, BMStyleField) {
 
 @interface BMCSVParser() <CHCSVParserDelegate>
 @property (strong, nonatomic) BeerObject *beer;
-@property (strong, nonatomic) BeerStyle *style;
+@property (strong, nonatomic) BeerStyleObject *style;
 @property (nonatomic) BMParserType type;
 @end
 
@@ -72,7 +72,7 @@ NS_ENUM(NSInteger, BMStyleField) {
                 self.beer = [[BeerObject alloc] init];
                 break;
             case BMParserTypeStyle:
-                self.style = [[BeerStyle alloc] init];
+                self.style = [[BeerStyleObject alloc] init];
                 break;
             default:
                 break;
@@ -102,12 +102,11 @@ NS_ENUM(NSInteger, BMStyleField) {
             switch (fieldIndex) {
                 case BMBeerFieldBeerName: self.beer.beerName = field; break;
                 case BMBeerFieldBreweryName: self.beer.brewery = field; break;
-                case BMBeerFieldStyle: self.beer.beerStyle = field; break;
                 case BMBeerFieldDescription: self.beer.beerDescription = field; break;
-                case BMBeerFieldABV: self.beer.abv = field; break;
-                case BMBeerFieldPrice: self.beer.price = field; break;
-                case BMBeerFieldSize: self.beer.size = field; break;
-                case BMBeerFieldNickname: self.beer.nickname = field; break;
+                case BMBeerFieldABV: self.beer.beerAbv = [self decimalNumberForString:field]; break;
+                case BMBeerFieldPrice: self.beer.beerPrice = [self decimalNumberForString:field]; break;
+                case BMBeerFieldSize: self.beer.beerSize = [self decimalNumberForString:field]; break;
+                case BMBeerFieldNickname: self.beer.beerNickname = field; break;
                 case BMBeerFieldIsActive: self.beer.isActive = ([field isEqualToString:@"yes"]) ? @YES: @NO; break;
                 case BMBeerFieldStyleID: self.beer.styleID = field; break;
                 default: break;
@@ -127,6 +126,12 @@ NS_ENUM(NSInteger, BMStyleField) {
 
 - (void)parser:(CHCSVParser *)parser didFailWithError:(NSError *)error {
     NSLog(@"Parsing CSV failed with Error: %@", error);
+}
+
+- (NSNumber *)decimalNumberForString:(NSString *)string {
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    return [formatter numberFromString:string];
 }
 
 @end

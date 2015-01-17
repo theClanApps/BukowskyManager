@@ -116,8 +116,7 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     if ([self.commentTextView.text isEqualToString:kBMPlaceholderTextForComments]) {
         self.commentTextView.text = @"";
         self.commentTextView.textColor = [UIColor blackColor];
@@ -125,8 +124,7 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
     [self.commentTextView becomeFirstResponder];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
+- (void)textViewDidEndEditing:(UITextView *)textView {
     if ([self.commentTextView.text isEqualToString:@""]) {
         self.commentTextView.text = kBMPlaceholderTextForComments;
         self.commentTextView.textColor = [UIColor lightGrayColor];

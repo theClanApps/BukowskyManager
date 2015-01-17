@@ -14,14 +14,4 @@
 @synthesize userLastNameLabel = _userLastNameLabel;
 @synthesize userFirstNameLabel = _userFirstNameLabel;
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 @end
