@@ -213,7 +213,7 @@
 
     [PFCloud callFunctionInBackground:@"sendPushNotificationToUserWhenBeerIsMarkedDrank"
                        withParameters:@{
-                                        @"user" : userBeer.drinkingUser.username,
+                                        @"username" : userBeer.drinkingUser.username,
                                         @"beerName" : userBeer.beer.beerName,
                                         }
                                 block:^(NSString *result, NSError *error) {
