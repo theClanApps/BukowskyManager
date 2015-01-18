@@ -25,7 +25,7 @@
 		4966FA5D1A0EED9700EE0824 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA5C1A0EED9700EE0824 /* Images.xcassets */; };
 		4966FA601A0EED9700EE0824 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966FA5E1A0EED9700EE0824 /* LaunchScreen.xib */; };
 		4966FA6C1A0EED9700EE0824 /* BukowskiManagerAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4966FA6B1A0EED9700EE0824 /* BukowskiManagerAppTests.m */; };
-		4971E7121A41285E00DB3BE1 /* BeerStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971E7111A41285E00DB3BE1 /* BeerStyle.m */; };
+		4971E7121A41285E00DB3BE1 /* BeerStyleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971E7111A41285E00DB3BE1 /* BeerStyleObject.m */; };
 		4971E7261A424D1D00DB3BE1 /* BMBeerGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */; };
 		49D325D51A11AA8C003769CA /* BMAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D325D41A11AA8C003769CA /* BMAccountManager.m */; };
 		638678121A1046D5008259DC /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 638678111A1046D5008259DC /* UserObject.m */; };
@@ -74,8 +74,8 @@
 		4966FA651A0EED9700EE0824 /* BukowskiManagerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BukowskiManagerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4966FA6A1A0EED9700EE0824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4966FA6B1A0EED9700EE0824 /* BukowskiManagerAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BukowskiManagerAppTests.m; sourceTree = "<group>"; };
-		4971E7101A41285E00DB3BE1 /* BeerStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerStyle.h; sourceTree = "<group>"; };
-		4971E7111A41285E00DB3BE1 /* BeerStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerStyle.m; sourceTree = "<group>"; };
+		4971E7101A41285E00DB3BE1 /* BeerStyleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerStyleObject.h; sourceTree = "<group>"; };
+		4971E7111A41285E00DB3BE1 /* BeerStyleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerStyleObject.m; sourceTree = "<group>"; };
 		4971E7241A424D1D00DB3BE1 /* BMBeerGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMBeerGenerator.h; path = CSVParsing/BMBeerGenerator.h; sourceTree = "<group>"; };
 		4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BMBeerGenerator.m; path = CSVParsing/BMBeerGenerator.m; sourceTree = "<group>"; };
 		49D325D31A11AA8C003769CA /* BMAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMAccountManager.h; path = "BukowskiManagerApp/Web Services/BMAccountManager.h"; sourceTree = SOURCE_ROOT; };
@@ -198,8 +198,8 @@
 			children = (
 				4914EA091A0FC121003D4FBB /* BeerObject.h */,
 				4914EA0A1A0FC121003D4FBB /* BeerObject.m */,
-				4971E7101A41285E00DB3BE1 /* BeerStyle.h */,
-				4971E7111A41285E00DB3BE1 /* BeerStyle.m */,
+				4971E7101A41285E00DB3BE1 /* BeerStyleObject.h */,
+				4971E7111A41285E00DB3BE1 /* BeerStyleObject.m */,
 				638678101A1046D5008259DC /* UserObject.h */,
 				638678111A1046D5008259DC /* UserObject.m */,
 				639A87041A1BA88A00D340C9 /* UserBeerObject.h */,
@@ -242,11 +242,11 @@
 				4966FA531A0EED9700EE0824 /* AppDelegate.h */,
 				4966FA541A0EED9700EE0824 /* AppDelegate.m */,
 				497A2F7E1A0FF16D006ED419 /* CSVParsing */,
+				4966FA5C1A0EED9700EE0824 /* Images.xcassets */,
+				4966FA5E1A0EED9700EE0824 /* LaunchScreen.xib */,
 				4966FA591A0EED9700EE0824 /* Main.storyboard */,
 				4914EA011A0FB9B9003D4FBB /* Models */,
 				4914EA0C1A0FC12F003D4FBB /* Resources */,
-				4966FA5C1A0EED9700EE0824 /* Images.xcassets */,
-				4966FA5E1A0EED9700EE0824 /* LaunchScreen.xib */,
 				4966FA4F1A0EED9700EE0824 /* Supporting Files */,
 				4900EC121A619C2E00647ABD /* ViewControllers */,
 				49D325D61A11AAA5003769CA /* Web Services */,
@@ -285,8 +285,8 @@
 			children = (
 				4971E7241A424D1D00DB3BE1 /* BMBeerGenerator.h */,
 				4971E7251A424D1D00DB3BE1 /* BMBeerGenerator.m */,
-				4900EC0A1A619BE300647ABD /* BMCSVParser.m */,
 				4900EC0B1A619BE300647ABD /* BMCSVParser.h */,
+				4900EC0A1A619BE300647ABD /* BMCSVParser.m */,
 			);
 			name = CSVParsing;
 			sourceTree = "<group>";
@@ -456,7 +456,7 @@
 				4900EC291A619C2E00647ABD /* BMPendingApprovalViewController.m in Sources */,
 				4900EC2A1A619C2E00647ABD /* BMUserTableViewController.m in Sources */,
 				4966FA551A0EED9700EE0824 /* AppDelegate.m in Sources */,
-				4971E7121A41285E00DB3BE1 /* BeerStyle.m in Sources */,
+				4971E7121A41285E00DB3BE1 /* BeerStyleObject.m in Sources */,
 				639A87061A1BA88A00D340C9 /* UserBeerObject.m in Sources */,
 				638678121A1046D5008259DC /* UserObject.m in Sources */,
 				4966FA521A0EED9700EE0824 /* main.m in Sources */,
