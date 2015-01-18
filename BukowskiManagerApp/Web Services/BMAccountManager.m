@@ -122,6 +122,7 @@
     userBeer.dateDrank = [NSDate date];
     userBeer.checkingEmployeeComments = comments;
     userBeer.checkingEmployee = [PFUser currentUser];
+    userBeer.pendingUpdatesToUserDevice = [NSNumber numberWithBool:YES];
     
     [userBeer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
