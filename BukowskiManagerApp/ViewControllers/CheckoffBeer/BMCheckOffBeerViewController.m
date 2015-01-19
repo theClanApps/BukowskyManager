@@ -9,6 +9,7 @@
 #import "BMCheckOffBeerViewController.h"
 #import "BMUserBeerTableViewController.h"
 #import "BMAccountManager.h"
+#import "UserBeerObject.h"
 
 static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comments here";
 
@@ -19,6 +20,7 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 @property (weak, nonatomic) IBOutlet UILabel *checkingEmployeeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UIButton *markItDrankButton;
+@property (strong, nonatomic) NSNumber *lastBeerToBeMarkedDrank;
 
 @end
 
@@ -54,9 +56,25 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
         commentsToSave = self.commentTextView.text;
     }
     
-    NSLog(@"Comments to save: %@", commentsToSave);
+    int countOfBeersDrank = 0;
     
-    [[BMAccountManager sharedAccountManager] checkoffBeer:self.userBeer withComments:commentsToSave WithCompletion:^(NSError *error, UserBeerObject *userBeer) {
+    for (UserBeerObject *userBeer in self.userBeers) {
+        if (userBeer.drank.boolValue == YES) {
+            countOfBeersDrank = countOfBeersDrank + 1;
+        }
+    }
+    
+    if ((countOfBeersDrank+1) == self.userBeers.count) {
+        self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:YES];
+    } else {
+        self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:NO];
+    }
+    
+    self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:YES];
+    
+    NSLog(@"%@", self.lastBeerToBeMarkedDrank);
+    
+    [[BMAccountManager sharedAccountManager] checkoffBeer:self.userBeer withComments:commentsToSave withIsThisTheLastBeerToBeCheckedOff:self.lastBeerToBeMarkedDrank forDrinkingUser:(UserObject *)self.userBeer.drinkingUser WithCompletion:^(NSError *error, UserBeerObject *userBeer) {
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
         } else {

@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 @class BeerObject;
 @class UserBeerObject;
+@class UserObject;
 
 typedef void (^BKSSuccessBlock) (id successObject);
 typedef void (^BKSErrorBlock) (NSError *error);
@@ -22,6 +23,8 @@ typedef void (^BKSErrorBlock) (NSError *error);
 - (void)loadUserBeersForUser:(PFUser *)user WithSuccess:(void(^)(NSArray *userBeers, NSError *error))block;
 - (void)checkoffBeer:(UserBeerObject *)userBeer
         withComments:(NSString *)comments
+        withIsThisTheLastBeerToBeCheckedOff:(NSNumber *)lastBeerBool
+        forDrinkingUser:(UserObject *)drinkingUser
       WithCompletion:(void(^)(NSError *error, UserBeerObject *userBeer))completion;
 - (void)logout;
 

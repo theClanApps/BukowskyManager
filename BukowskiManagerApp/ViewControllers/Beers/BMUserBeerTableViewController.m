@@ -92,6 +92,7 @@
     if ([[segue identifier] isEqualToString:@"checkOffBeerSegue"]) {
         BMCheckOffBeerViewController *checkOffBeerVC = (BMCheckOffBeerViewController *)segue.destinationViewController;
         checkOffBeerVC.userBeer = self.selectedUserBeer;
+        checkOffBeerVC.userBeers = self.userBeers;
     }
 }
 

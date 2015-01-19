@@ -71,7 +71,7 @@
 
 - (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block {
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
-    [query whereKeyExists:@"MugClubStartDate"];
+    [query whereKeyExists:@"mugClubStartDate"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if (block) {
@@ -117,6 +117,8 @@
 
 - (void)checkoffBeer:(UserBeerObject *)userBeer
         withComments:(NSString *)comments
+        withIsThisTheLastBeerToBeCheckedOff:(NSNumber *)lastBeerBool
+        forDrinkingUser:(UserObject *)drinkingUser
       WithCompletion:(void(^)(NSError *error, UserBeerObject *userBeer))completion {
     userBeer.drank = [NSNumber numberWithBool:YES];
     userBeer.dateDrank = [NSDate date];
@@ -135,6 +137,19 @@
             }
         }
     }];
+    
+    if (lastBeerBool) {
+        drinkingUser.allBeersDrank = [NSNumber numberWithBool:YES];
+        
+        [drinkingUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                drinkingUser.allBeersDrank = [NSNumber numberWithBool:YES];
+                NSLog(@"allBeersDrank property successfully set to true!");
+            } else {
+                NSLog(@"Error setting allBeersDrank property to true on user object: %@",error);
+            }
+        }];
+    }
 }
 
 - (void)logout {
