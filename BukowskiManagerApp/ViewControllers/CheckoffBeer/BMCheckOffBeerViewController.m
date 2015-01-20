@@ -70,10 +70,6 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
         self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:NO];
     }
     
-    self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:YES];
-    
-    NSLog(@"%@", self.lastBeerToBeMarkedDrank);
-    
     [[BMAccountManager sharedAccountManager] checkoffBeer:self.userBeer withComments:commentsToSave withIsThisTheLastBeerToBeCheckedOff:self.lastBeerToBeMarkedDrank forDrinkingUser:(UserObject *)self.userBeer.drinkingUser WithCompletion:^(NSError *error, UserBeerObject *userBeer) {
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
