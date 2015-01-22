@@ -211,23 +211,10 @@
 - (void)sendPushNotification:(UserBeerObject *)userBeer
               withCompletion:(void(^)(NSError *error, NSString *result))completion {
 
-    [PFCloud callFunctionInBackground:@"sendPushNotificationToUserWhenBeerIsMarkedDrank"
-                       withParameters:@{
-                                        @"username" : userBeer.drinkingUser.username,
-                                        @"beerName" : userBeer.beer.beerName,
-                                        }
-                                block:^(NSString *result, NSError *error) {
-                                    if (!error) {
-                                        if (completion) {
-                                            completion(nil, result);
-                                        }
-                                    } else {
-                                        if (completion) {
-                                            completion(error, nil);
-                                        }
-                                    }
-                                }];
-     
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" equalTo:userBeer.drinkingUser];
+    [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                   withMessage:[NSString stringWithFormat:@"You drank %@!", userBeer.beer.beerName]];
 }
 
 @end
