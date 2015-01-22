@@ -19,6 +19,8 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
 @property (weak, nonatomic) IBOutlet UILabel *checkingEmployeeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UIButton *markItDrankButton;
+@property (strong, nonatomic) NSNumber *lastBeerToBeMarkedDrank;
+
 
 @end
 
@@ -54,11 +56,30 @@ static NSString * const kBMPlaceholderTextForComments = @"Optionally enter comme
         commentsToSave = self.commentTextView.text;
     }
     
-    NSLog(@"Comments to save: %@", commentsToSave);
+    int countOfBeersDrank = 0;
+    
+    for (UserBeerObject *userBeer in self.userBeers) {
+        if (userBeer.drank.boolValue == YES) {
+            countOfBeersDrank = countOfBeersDrank + 1;
+        }
+    }
+    
+    if ((countOfBeersDrank+1) == self.userBeers.count) {
+        self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:YES];
+    } else {
+        self.lastBeerToBeMarkedDrank = [NSNumber numberWithBool:NO];
+    }
     
     [[BMAccountManager sharedAccountManager] checkoffBeer:self.userBeer withComments:commentsToSave WithCompletion:^(NSError *error, UserBeerObject *userBeer) {
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
+            
+            if (self.lastBeerToBeMarkedDrank == [NSNumber numberWithBool:YES]) {
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"user" equalTo:userBeer.drinkingUser];
+                [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                               withMessage:@"Woo hoo! You drank all the beers!"];
+            }
         } else {
             NSLog(@"Error checking beer: %@", error);
         }

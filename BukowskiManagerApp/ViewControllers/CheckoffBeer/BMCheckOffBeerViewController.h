@@ -12,5 +12,6 @@
 @interface BMCheckOffBeerViewController : UIViewController
 
 @property (strong, nonatomic) UserBeerObject *userBeer;
+@property (strong, nonatomic) NSArray *userBeers;
 
 @end
