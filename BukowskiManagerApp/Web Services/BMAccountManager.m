@@ -128,6 +128,9 @@
         if (succeeded) {
             if (completion) {
                 completion(nil, userBeer);
+                [self sendPushNotification:userBeer withCompletion:^(NSError *error, NSString *result) {
+                    NSLog(@"Push notification succeeded!");
+                }];
             }
         } else {
             if (completion) {
@@ -204,6 +207,15 @@
         [checkingEmployees addObject:userBeerObject.checkingEmployee];
     }
     return [checkingEmployees copy];
+}
+
+- (void)sendPushNotification:(UserBeerObject *)userBeer
+              withCompletion:(void(^)(NSError *error, NSString *result))completion {
+
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" equalTo:userBeer.drinkingUser];
+    [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                   withMessage:[NSString stringWithFormat:@"You drank %@!", userBeer.beer.beerName]];
 }
 
 @end
