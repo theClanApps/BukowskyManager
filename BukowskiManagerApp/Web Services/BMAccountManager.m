@@ -71,7 +71,7 @@
 
 - (void)loadUsersWithSuccess:(void(^)(NSArray *users, NSError *error))block {
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
-    [query whereKeyExists:@"MugClubStartDate"];
+    [query whereKeyExists:@"mugClubStartDate"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if (block) {
