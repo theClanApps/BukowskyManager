@@ -123,20 +123,9 @@
     userBeer.checkingEmployeeComments = comments;
     userBeer.checkingEmployee = [PFUser currentUser];
     userBeer.pendingUpdatesToUserDevice = [NSNumber numberWithBool:YES];
-    
-    [userBeer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            if (completion) {
-                completion(nil, userBeer);
-                [self sendPushNotification:userBeer withCompletion:^(NSError *error, NSString *result) {
-                    NSLog(@"Push notification succeeded!");
-                }];
-            }
-        } else {
-            if (completion) {
-                completion(error, nil);
-            }
-        }
+
+    [self markBeerDrank:userBeer withCompletion:^(NSError *error, NSString *result) {
+        // Handle Completion
     }];
 }
 
@@ -218,4 +207,15 @@
                                    withMessage:[NSString stringWithFormat:@"You drank %@!", userBeer.beer.beerName]];
 }
 
+- (void)markBeerDrank:(UserBeerObject *)userBeer
+       withCompletion:(void(^)(NSError *error, NSString *result))completion {
+    [PFCloud callFunctionInBackground:@"markBeerDrank" withParameters:@{
+                                                           @"beerId" : userBeer.objectId,
+                                                           @"beerName" : userBeer.beer.beerName,
+                                                           @"userId" : userBeer.drinkingUser.objectId
+                                                           }
+                                                        block:^(id object, NSError *error) {
+                                                            // Handle Completion
+                                                        }];
+}
 @end
